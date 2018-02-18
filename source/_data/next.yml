@@ -1,0 +1,48 @@
+scheme: Pisces
+
+rss: # Left blank intentionally for auto-generated feed
+
+menu:
+  home: / || home
+  archives: /archives
+  about: /about || user
+  categories: /categories || th
+  tags: /tags || tags
+  commonweal: /404.html || heartbeat
+
+links_title: "Friends' Sites"
+
+links:
+  Peyuan Qi's Website: https://peiyuanqi.me/
+  # Title: http://example.com/
+
+disqus:
+  enable: true
+  shortname: Patricium
+  count: true
+
+mathjax: true
+
+avatar: /images/avatar.jpeg
+
+  #menu_icons:
+  #enable: true
+  # Icon Mapping.
+  #home: home
+  #about: user
+  #categories: th
+  #tags: tags
+  #archives: archive
+  #commonweal: heartbeat
+
+social:
+  GitHub: https://github.com/tripack45 || github
+  E-Mail: mailto:patrick.yaoyue@gmail.com || envelope
+  #Google: https://plus.google.com/yourname || google
+  #Twitter: https://twitter.com/yourname || twitter
+  #FB Page: https://www.facebook.com/yourname || facebook
+  #VK Group: https://vk.com/yourname || vk
+  #StackOverflow: https://stackoverflow.com/yourname || stack-overflow
+  #YouTube: https://youtube.com/yourname || youtube
+  #Instagram: https://instagram.com/yourname || instagram
+  #Skype: skype:yourname?call|chat || skype

@@ -5,4 +5,4 @@ public/
 node_modules/
 db.json
 .deploy_git/
-
+.DS_Store

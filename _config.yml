@@ -4,10 +4,10 @@
 
 # Site
 title: Patricium
-subtitle: Humble words written by Yue (Patrick) Yao
-description: 
+subtitle: Humble words by Yue Yao
+description: He is currently a senior student studying ECE in Joint Instiute at STJU. He likes Programming Languages, Systems and Good Stories. 
 author: Yue Yao
-language: Chinese Simplified
+language: en 
 timezone: Asia/Shanghai
 
 # URL
@@ -72,7 +72,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: archer
+theme: next
 
 ## Theme 'Archer' related configurations:
 jsonContent:
