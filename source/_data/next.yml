@@ -25,6 +25,9 @@ mathjax: true
 
 avatar: /images/avatar.jpeg
 
+# Sharing tool
+add_this_id: ra-5a8aeee2a1b4553a
+
   #menu_icons:
   #enable: true
   # Icon Mapping.
