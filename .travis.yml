@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- 6.0.0
+branches:
+  only:
+  - source
+
+install: npm install
+
+before_script:
+- git config --global user.name "tripack45"
+- git config --global user.email "patrick.yaoyue@gmail.com"
+- openssl aes-256-cbc -K $encrypted_bbb1dc969e2e_key -iv $encrypted_bbb1dc969e2e_iv -in 'deploy_keys/keys.enc' -out keys -d
+- mv keys ~/.ssh/id_rsa
+- chmod 0600 ~/.ssh/id_rsa
+- eval "$(ssh-agent -s)"
+- ssh-add ~/.ssh/id_rsa
+
+script: hexo clean && hexo g && hexo d
+

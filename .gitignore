@@ -6,3 +6,5 @@ node_modules/
 db.json
 .deploy_git/
 .DS_Store
+deploy_keys/keys
+deploy_keys/keys.pub

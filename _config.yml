@@ -79,27 +79,6 @@ image_caption:
   enable: true #false to disable
   class: 
 
-
-## Theme 'Archer' related configurations:
-jsonContent:
-  meta: true
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: true
-    excerpt: false
-    categories: true
-    tags: true
-
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
