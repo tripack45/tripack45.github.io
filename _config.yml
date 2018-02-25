@@ -74,6 +74,12 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# Allow images to have captions
+image_caption:
+  enable: true #false to disable
+  class: 
+
+
 ## Theme 'Archer' related configurations:
 jsonContent:
   meta: true
