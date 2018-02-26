@@ -8,11 +8,11 @@ subtitle: Humble words by Yue Yao
 description: He is currently a senior student studying ECE in Joint Instiute at SJTU. He likes Programming Languages, Systems and Good Stories. 
 author: Yue Yao
 language: en 
-timezone: Asia/Shanghai
+timezone: 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://tripack45.github.io
+url: https://tripack45.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
