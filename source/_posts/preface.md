@@ -1,9 +1,9 @@
 ---
 title: 一米远方，一勺鸡汤，和十分之一的奇迹
-tags: Life
+tags:
+  - 'Language: Chinese'
 categories:
-  - Language
-  - Chinese
+  - [Life, Thoughts]
 date: 2018-02-18 00:56:59
 ---
 
