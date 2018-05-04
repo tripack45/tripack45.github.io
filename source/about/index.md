@@ -5,7 +5,13 @@ date: 2018-02-19 20:02:36
 
 Hi, welcome to Patricium. You have reached the personal blog of Yue Yao (姚越). I hope you will enjoy the posts. For my CV/Resume please refer to the "Resume" menu. Do please treat this page as an open dissussions/comment page. You can leave a message here for me. 
 
-I name this place Patricium. It's made up from my English name Patrick and the [Latin suffix "ium"](http://www.dictionary.com/browse/-ium), which basically means "a place". 
+I name this place Patricium. It's made up from my English name Patrick and the [Latin suffix "ium"](http://www.dictionary.com/browse/-ium), which basically means "a place". The subtitle for this site reads "He has three chairs.". In taking the course VR253, one of the assigned readers, Sherry Turkle, introduced me to a concept called "the virtuous circle". The concept derives from the quote 
+
+{% blockquote Henry David Thoreau %}
+I had three chairs in my house: one for solitude, two for friendship, three for society.
+{% endblockquote %}
+
+It emphasizes the importance of converstaions. One must have conversation first with himself, then with a friend, and bring that conversation to the society. This place, I hope, would become a place where I will be able to have a conversation. I always KNOW that words have power. It resonates with human minds and ignites passion, anger, curiosity, hatred, love, compassion... In this particular era, I feel a conversation encompasses special power. 
 
 For a very long time I have tried to write something. I am no good writer, to be honest. I lead a simple and somewhat tedious life so I don't have much to blog about. But I will try to keep updating this blog around 1 post per week. I hope I can keep you all entertained. Posts will be written in English. Some posts are written in Chinese, which is my native tongue, mainly because they are about specific people/events around me.
 
