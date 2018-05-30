@@ -201,9 +201,9 @@ All the evidence suggests that somehow the compiler generates wrong binary code.
 
 **The following content is adpated from an reply by CMU 15513 instruction team. The author is Kevin Geng.**
 
- I've been able to reduce the test case to the following:
+I've been able to reduce the test case to the following:
  
-```c
+``` c
 int bitCount(int x) {
   int mask2      = 0x55555555;
   int count2_0   = x & mask2;
@@ -215,7 +215,7 @@ int bitCount(int x) {
 
   return 0;
 }
-``` 
+```
 
 On my personal machine, running with `-O0` outputs `count2 >> 2 = eaaaaaaa` and running with `-O1` outputs `count2 >> 2 = 2aaaaaaa`. Obviously, this is wrong. ... it should still be defined as an arithmetic right-shift; certainly it wouldn't be reasonable to believe that the default for `clang` is to output a logical right-shift. And in general, `clang` does use an arithmetic right-shift; though while `gcc` [guarantees](https://gcc.gnu.org/onlinedocs/gcc/Integers-implementation.html) this behavior, I couldn't find any similar sources for `clang`. 
 
@@ -234,7 +234,7 @@ In conclusion, there is no bug of any sort.
 
 I've always know that compiler are allowed to assume that undefined behaviors may not happen, and preform optimizations based on that assumption. A well known example, is that the compiler may optimize the following code into infinite loops:
 
-```c
+``` c
 int main() {
     unsigned int i = 1u;
     while (i) {
