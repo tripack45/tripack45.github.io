@@ -3,7 +3,7 @@ title: About me & this site
 date: 2018-02-19 20:02:36
 ---
 
-Hi, welcome to Patricium. You have reached the personal blog of Yue Yao (姚越). I hope you will enjoy the posts. For my CV/Resume please refer to the "Resume" menu. Do please treat this page as an open dissussions/comment page. You can leave a message here for me. 
+Hi, welcome to Patricium. You have reached the personal blog of Yue Yao (姚越). I hope you will enjoy the posts. Here is my [CV](/about/cv.pdf) and [resume](/about/resume.pdf). Do please treat this page as an open dissussions/comment page. You can leave a message here for me. 
 
 I name this place Patricium. It's made up from my English name Patrick and the [Latin suffix "ium"](http://www.dictionary.com/browse/-ium), which basically means "a place". The subtitle for this site reads "He has three chairs.". In taking the course VR253, one of the assigned readers, Sherry Turkle, introduced me to a concept called "the virtuous circle". The concept derives from the quote 
 
