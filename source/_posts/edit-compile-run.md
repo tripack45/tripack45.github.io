@@ -69,7 +69,7 @@ Another thing to be noted is that this effect of edit-compile-run cycle is preva
   * Another classic example: a program that prints a heart.
   * An question and answer games.
   * And games. Many programmers's first project is to write some sort of a game, that ideally involves some GUI. Altough very few of them actually finishes it. 
-  * And a lot of struggling with how to properly perform IOs (e.g. how to write format strings in ``scanf`s and `printf`s, how to flush the `stdin`)
+  * And a lot of struggling with how to properly perform IOs (e.g. how to write format strings in `scanf`s and `printf`s, how to flush the `stdin`)
   * I guess this is also why *Hello world*s are so popular as the first program of any new language introduced.
 
 This list goes on and on. Once you really learned programming, you will one day realize that thoses programs are perhaps among the most uniteresting ones (except the game one, but novice programmer rarely realize the real fun part of interactive programs, which inevitable requires understanding of concurrency and asynchronous programming). The logic is straight forward, and there is really nothing valuable learned from the experience (even worse, sometimes you get used to really shitty designs, e.e. C++ stream IOs, and you will in the future pay a price getting out of those habbits). 
