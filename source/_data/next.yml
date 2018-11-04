@@ -8,7 +8,7 @@ menu:
   about: /about || user
   categories: /categories || th
   tags: /tags || tags
-  commonweal: /404.html || heartbeat
+  # commonweal: /404.html || heartbeat
 
 links_title: "Friends' Sites"
 
@@ -27,7 +27,7 @@ disqus:
 
 mathjax: true
 
-avatar: /images/avatar.jpeg
+avatar: https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400
 
 # Sharing tool
 add_this_id: ra-5a8aeee2a1b4553a
