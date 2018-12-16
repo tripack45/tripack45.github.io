@@ -32,6 +32,10 @@ avatar: https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=40
 # Sharing tool
 add_this_id: ra-5a8aeee2a1b4553a
 
+favicon:
+  small: /images/favicon-16x16.png
+  medium: /images/favicon-32x32.png
+
   #menu_icons:
   #enable: true
   # Icon Mapping.
