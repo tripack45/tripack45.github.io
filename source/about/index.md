@@ -13,7 +13,9 @@ I had three chairs in my house: one for solitude, two for friendship, three for 
 
 It emphasizes the importance of converstaions. One must have conversation first with himself, then with a friend, and bring that conversation to the society. This place, I hope, would become a place where I will be able to have a conversation. I always KNOW that words have power. It resonates with human minds and ignites passion, anger, curiosity, hatred, love, compassion... In this particular era, I feel a conversation encompasses special power. 
 
-For a very long time I have tried to write something. I am no good writer, to be honest. I lead a simple and somewhat tedious life so I don't have much to blog about. But I will try to keep updating this blog around 1 post per week. I hope I can keep you all entertained. Posts will be written in English. Some posts are written in Chinese, which is my native tongue, mainly because they are about specific people/events around me.
+For a very long time I have tried to write something. I am no good writer, to be honest. I lead a simple and somewhat tedious life so I don't have much to blog about. But I will try to keep updating this blog around 1 post per ~~week~~ month. I hope I can keep you all entertained. Posts will be written in English. Some posts are written in Chinese, which is my native tongue, mainly because they are about specific people/events around me.
+
+The logo of the site, months after the creation of it, has been chosen. It's part of the typing judgment stating the type of a particular term. The main reason to choose it because it's cool and not many people has used it (the symbole lambda has abused for a long time). The original idea is to have only the entailment symbol, which looks tedious. Then I would want to have a capital Gammal, which feels verbose. I finally decided on the dot, which signifies empty context. Whenever you have a term that has a type under an empty context, you have a complete type-safe program. 
 
 Thanks for reading this.
 
