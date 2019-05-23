@@ -4,7 +4,8 @@ rss: # Left blank intentionally for auto-generated feed
 
 menu:
   home: / || home
-  archives: /archives
+  Resume/CV: /cv || pencil
+  archives: /archives || tasks
   about: /about || user
   categories: /categories || th
   tags: /tags || tags
@@ -14,7 +15,7 @@ links_title: "Friends' Sites"
 
 links:
   Peyuan Qi's Website: https://peiyuanqi.me/
-  Nathan Zhou's Website: https://zzhou612.me/
+  Nathan Zhou's Website: https://zzhou612.com/
   Luke Xuan's Blog: https://blog.xlk.me/
   Tony Su's Blog: https://tonyfloatersu.github.io/
   ZhxChen17's Blog: https://zhxchen17.github.io/
