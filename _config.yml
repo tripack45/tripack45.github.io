@@ -83,9 +83,9 @@ image_caption:
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@github.com:tripack45/tripack45.github.io.git
-  branch: master 
-  name: tripack45
-  email: patrick.yaoyue@gmail.com
+  - type: git
+    repo: git@github.com:tripack45/tripack45.github.io.git
+    branch: master 
+    name: tripack45
+    email: patrick.yaoyue@gmail.com
 
