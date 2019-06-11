@@ -1,6 +1,7 @@
 language: node_js
 node_js:
-- 6.0.0
+- "8"
+dist: xenial
 branches:
   only:
   - source
@@ -15,6 +16,8 @@ before_script:
 - chmod 0600 ~/.ssh/id_rsa
 - eval "$(ssh-agent -s)"
 - ssh-add ~/.ssh/id_rsa
+- npm --version
+- node --version
 
 script: hexo clean && hexo g && hexo d
 
