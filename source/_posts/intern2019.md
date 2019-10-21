@@ -1,5 +1,5 @@
 ---
-title: 'Parallelism on Its Own Feet: 90 Days as NVidia Intern'
+title: 'Parallelism on Its Own Feet: 90 Days as an NVidia Intern'
 date: 2019-10-20 03:52:50
 tags:
 - Internship
