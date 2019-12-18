@@ -28,10 +28,6 @@ disqus:
   shortname: Patricium
   count: true
 
-math:
-  mathjax:
-    enabled: true
-
 avatar:
   url: https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400
 
@@ -72,3 +68,8 @@ social:
 post_meta:
   updated_at:
     enabled: false
+
+# Math Equations Render Support
+math:
+  mathjax:
+    enable: true
