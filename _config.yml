@@ -5,7 +5,7 @@
 # Site
 title: Patricium
 subtitle: He had three chairs. 
-description: He is an Master's of Science student in Computer Science at Carnegie Mellon University. He likes Programming Languages, Systems and Good Stories. 
+description: He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.
 author: Yue Yao
 language: en 
 timezone: 
@@ -88,4 +88,5 @@ deploy:
     branch: master 
     name: tripack45
     email: patrick.yaoyue@gmail.com
+
 
