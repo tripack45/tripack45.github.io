@@ -64,10 +64,10 @@ social:
   #Instagram: https://instagram.com/yourname || instagram
   #Skype: skype:yourname?call|chat || skype
 
-# Disables buggy "updated at"
+
 post_meta:
   updated_at:
-    enabled: false
+    enable: false
 
 # Math Equations Render Support
 math:
