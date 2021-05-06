@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/icon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/icon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/icon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://tripack45.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="In the fall semester of 2019, I had the opportunity to work as a teaching assistant for the course 15-312/15-652 Foundations of Programming Languages, taught by Bob Harper. Today we wrapped up (almos">
+<meta name="keywords" content="CMU,Teaching,Programming Languages">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Foundations of Programming Languages: A TA&#39;s Perspective (Part 1&#x2F;2)">
+<meta property="og:url" content="https://tripack45.github.io/2019/12/23/312f19p1/index.html">
+<meta property="og:site_name" content="Patricium">
+<meta property="og:description" content="In the fall semester of 2019, I had the opportunity to work as a teaching assistant for the course 15-312/15-652 Foundations of Programming Languages, taught by Bob Harper. Today we wrapped up (almos">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tripack45.github.io/images/312f19.png">
+<meta property="og:updated_time" content="2021-05-06T21:57:52.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Foundations of Programming Languages: A TA&#39;s Perspective (Part 1&#x2F;2)">
+<meta name="twitter:description" content="In the fall semester of 2019, I had the opportunity to work as a teaching assistant for the course 15-312/15-652 Foundations of Programming Languages, taught by Bob Harper. Today we wrapped up (almos">
+<meta name="twitter:image" content="https://tripack45.github.io/images/312f19.png">
+
+<link rel="canonical" href="https://tripack45.github.io/2019/12/23/312f19p1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Foundations of Programming Languages: A TA's Perspective (Part 1/2) | Patricium</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Patricium</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">He had three chairs.</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-tasks"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-resume/cv">
+
+    <a href="/cv" rel="section"><i class="fa fa-fw fa-pencil"></i>Resume/CV</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tripack45.github.io/2019/12/23/312f19p1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+      <meta itemprop="name" content="Yue Yao">
+      <meta itemprop="description" content="He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patricium">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Foundations of Programming Languages: A TA's Perspective (Part 1/2)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-23 02:00:00" itemprop="dateCreated datePublished" datetime="2019-12-23T02:00:00+00:00">2019-12-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/" itemprop="url" rel="index">
+                    <span itemprop="name">Life</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/Thoughts/" itemprop="url" rel="index">
+                    <span itemprop="name">Thoughts</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/12/23/312f19p1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/23/312f19p1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/312f19.png" alt="Fall 2019 instance of &quot;Foundations of Programming Languages&quot;"><span class="image-caption">Fall 2019 instance of &quot;Foundations of Programming Languages&quot;</span></p>
+<p>In the fall semester of 2019, I had the opportunity to work as a teaching assistant for the course <em>15-312/15-652 Foundations of Programming Languages</em>, taught by <a href="https://existentialtype.wordpress.com/" target="_blank" rel="noopener">Bob Harper</a>. Today we wrapped up (almost) all of the work. As I have always said, the best way to build clear insight into a subject is perhaps by teaching and explaining it to the others. On the other hand, it was quite a unique experience. In addition to the usual grading and recitation, I invented a few homework problems (the DFA problem in HW2 and the entire KPCF problems) and wrote a few exam questions. There are a few things that went pretty well, and honestly some things just don’t quite go well as we would hope for. For the purpose of this post, I don’t want to (and honestly can’t) go into too much details, but focus on mainly 3 things: the philosophy behind this course, one unfortunate situation, and what it feels like working with Bob.</p>
+<p>This is the first part of a two-part post, where I mainly talk about the philosophy of this course, as I understand it. In other words, I seek to answer the question of <em>why study programming languages</em> with my own experience.</p>
+<a id="more"></a>
+<h1 id="The-Course-amp-its-Philosophy"><a href="#The-Course-amp-its-Philosophy" class="headerlink" title="The Course &amp; its Philosophy"></a>The Course &amp; its Philosophy</h1><p>What should a course on programming languages be about, and why or why not should one take it? The question is closely related to another question, which is <a href="https://www.cs.cmu.edu/~rwh/courses/ppl/phil.html" target="_blank" rel="noopener">“Why Study Programming Languages”</a>, a question that has been answered pretty neatly. Yet those two questions are distinct in that understanding the importance of studying programming languages does not immediately shed light on how we should teach it. In particular, one must further make design choices regarding what content to present, in what manner, and what are the conclusions we want to put emphasize on. In other words, motivating the study of a particular field is about asking the right questions, while teaching a topic is perhaps more about providing <em>solutions</em>.</p>
+<p>Much of the study of natural sciences are devoted to answering the question of what is a particular subject, be that physics, computers, and in our cases, programming languages. The answers to this type of questions usually come in two forms: <em>eliminatism</em> ones and the <em>holism</em> ones. (I am not an expert on scientific philosophy, and I could be misusing terminologies.) <em>Eliminative</em> approaches explain things by providing an alternative world where the phenomenons can be derived from other first principals. For example: “There is no light, but merely electromagnetic waves of particular wavelengths”. The eliminative approach has been very successful in natural sciences. Eliminating the idea of <em>light</em> and be in favor of the broader notion of <em>electromagnetic waves</em>, we can make better predictions for the behavior of light itself. On the other hand, holism explanations are direct characterizations of the phenomenons themselves. For example, trying to understand chemical reactions by establishing rules for different types of reaction, instead of trying to derive everything from quantum physics, will be a holism approach. </p>
+<p>It must be stated unequivocally that both approaches are essential and effective. The effectiveness of the eliminative approach has been proved over and over by advancement in Physics. It has been so effective that some even argue that it is possible for us to understand the entire universe if we just start from the first principals of Physics. A famous 1972 article <em>More Is Different</em> by P. W. Anderson counters this point nicely. It emphasizes a simple fact: science itself is hierarchical, and laws of nature have to be identified for each hierarchy. Understanding the components making up the system does not necessarily provide sufficient insight into the behavior of the system itself. </p>
+<p>We have already seen a lot of examples in computer science. We have perfect understanding on how each neuron works in deep neural networks, and we can even derive an equation that is sufficient to describe the behavior of the entire network, yet we still don’t understand how it works. Same story for concurrent data structures, even though we understand how the hardware operates in every detail, we have a hard time trying to derive the theoretical performance bounds. Both examples suggests when a system scales in quantity, new observations have to be made in order to understand the system as a whole [5]. </p>
+<p>I think it’s important to remind people that the “more is different” idea applies to Computer Science as well, and especially to the study of programming languages. When people study computers, it is extremely easy for us to take a full-blown eliminative view and forgot about the holism approach entirely. Part of the reason is that computers are man made objects, and there doesn’t seem to be need to build a holism view if we understand how they are built. This is especially true in terms of programming languages. In many universities, the study of programming languages are very often conflated with the study of compilers, and we very often teach programming languages by explaining it in terms of machine behaviors or other languages. Case in point includes teaching people pointers using “address spaces” and telling students variables of objects in Java are “just pointers” [1], objects are just “<code>struct</code>s associated with functions”, and most infamously recursion is about a “stack”. This method quickly breaks down when we try to introduces to people ideas like <em>coroutines</em> and <em>continuations</em>. The implementation for both mechanism are messy and complicated, and learning about them does not shed light on how to properly work with them! If we take this further, you immediately reach conclusion that “all turing complete languages are essentially same because they can simulate each other”, which is a very degenerative view.</p>
+<p>It’s true that computers and programming languages are both man made, and are constructed in a level by level manner. However, Anderson’s observation still applies. By composing more and more components into one new thing, we lose the ability to reason about the things we built through analysis of its components, and new laws have to be found for this new thing we just created. In fact, I believe its fair to say that the study of computer science brings new meaning to Anderson’s argument. In stead of having to discover principals for whatever nature throw at us, in computer science we have the ability to <em>choose</em> the principals governing higher hierarchies by building <em>abstractions</em>. Instead of having to live with a fixed lower hierarchies (e.g., we can’t change the laws of physics that governs chemistry), we get to design different <em>implementations</em> for the same abstraction.</p>
+<p>Many CS courses often only offers an eliminative perspective. Many books [2] in PL puts way too much emphasize on the eliminative perspective of programming languages, often discuss languages in terms of their “most popular” implementations, and treats language features as syntatic sugars. This course aims to deliver something unique. We wish to teach people a way to first talk about different languages in terms of the abstractions. Using those tools, we could compare and evaluate language designs according to the abstraction they aim to provide, instead of a specific implementation of their compilers/interpreters. </p>
+<p>In other words, we hope to introduce to the students the <strong>power of formalisms</strong>, that is, the ability to formalize languages in a way that does not rely on any specific implementation (spoiler alert: through the lens of <em>types</em>). Those formalisms not only allow us to make sense of the language designs (and identifies language designs that do not make sense), we also discover that the same set of formalisms happen to capture much of what it means to compute, and exposes that there exists different types of computations [3]. Those goals are achieved by exposing students to multiple toy languages, each with a different feature. For each of those toy languages, we demonstrate how do we formalize the feature, and discuss various designs. In other words, this course discuss the act of making abstractions itself [4].</p>
+<p>The unique thing about programming languages is that, programming languages design is very often a topic of public discussion. Everyone with some experience of programming, at some point, talks about one’s favorite language / feature [6]. People fight, and organize around choices of programming languages / language designs. And, as you would imagine, most of the claims, especially those made by Key Opinion Leaders on the Internet, instead of scholars, doesn’t make sense once you try to put it in concrete terms using formalisms. In other words, one’s understanding about programming languages, will be under constant attack by all sorts of nonsense. It’s important for one to be able to hold his/her ground in the face of other unsound claims, and to respond to those claims with logical and sound arguments. Because otherwise the things we advocated will not be able to stick for very long. This again puts more emphasis on the power of formalisms: personal tastes and cults of programming practices won’t stand the test of time [7], because they are justified by the situations. Only rock solid and crystal clear reasoning (i.e. theorems) through formalisms will.</p>
+<h1 id="Working-with-Bob"><a href="#Working-with-Bob" class="headerlink" title="Working with Bob"></a>Working with Bob</h1><p>Finally I want to say something about working with Bob. As a disclaimer, I did ask Bob to sign my copy of <a href="https://www.cs.cmu.edu/~rwh/pfpl/" target="_blank" rel="noopener">PFPL</a>, so the conflict of interest is obvious, and you should definitely treat whatever I got to say next as total trash :-). </p>
+<p>Bob is the the principled type: those people act according to principles, even if those principles potentially lead them to practically awkward situations. In particular, arguments of practicality will almost always be rejected. Things like “we should do this or that because they are the easy work around” are rejected outright: Bob believe it’s simply not worthwhile to trade what’s right for the temporary expediency because you will ends up paying more. Now I don’t totally agree with this point of view, but he has a point. Still remember <a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/" target="_blank" rel="noopener">the billion-dollar mistake</a> of null-pointers committed by Tony Hoare? For the educator’s point of view, Bob believe that it’s most beneficial to teach students the right way, and leaving the “adapting to an imperfect industry solution” part to the job. Again, I think it probably is the right general idea, but things should be taken care of case by case.</p>
+<p>On a second note, Bob always tries to present the version of himself. In some cases, he basically apologizes for being not perfect, or not being on his A-game. I genuinely don’t know what to say, because there is no way that I’m holding myself to such high standards. As a result, when you work with Bob, be prepared to be corrected publicly because 1) the instruction team has the absolute responsibility to provide student with unequivocally right ideas, no matter the cost 2) it’s understandable that all humans make mistakes / confuses (conflates) things. I got the honor to be publicly corrected by Bob on Piazza twice. If any of the reader got themselves into a similar situation, my suggestion is to keep calm: there’s nothing personal, Bob don’t question your job performance, and it’s always worthwhile to go to his office to clear things up for your own good.</p>
+<p>It has been a very interesting journey working with Bob. 15-312 has been offered for almost 2 decades and the course is still under significant development. As a TA, you have the opportunity to write new homeworks and discuss your work with Bob. Since Bob genuinely care about the learning experience of students, your efforts will not go unnoticed.</p>
+<hr>
+<p><em>Footnotes:</em></p>
+<p>[1] In fact, we don’t really have a better way to teach them because the languages are flawed once you start to discuss the abstraction they try to provide. This is particularly true for languages like C. If you start teaching students C as some macro for assembly, then there is no way one can explain recursion without mentioning a stack, because dynamically “substituting a value into the function body” sounds much more absurd. That is one more reason against arbitrarity in language design, because they create popular languages that are super hard to teach!</p>
+<p>[2] Yes, I’m thinking about “Programming Language Pragmatics”.</p>
+<p>[3] Trying to argue that all computations can be viewed as actions of a universal Turing Machine also falls into the eliminative argument.</p>
+<p>[4] To be fair, this course also take the eliminative approach from time to time. One example is that in the discussion of Dynamically Typed languages we are argued that dynamically typed languages are really uni-typed. Another example being “by name languages are just by-value languages with support for computation types”. One could argue this type of arguments goes against our own philosophy. Well, my defense would be the following: we only do this when we hope to show that the added structure does not provide enough benefit (if not being actually harmful) to motivate the design.</p>
+<p>[5] For the same reason I believe machine learning methods <strong>right now</strong> targeting automated code synthesis / reasoning won’t work very well, because most of the methods relies on treating the language as a linguistic model. This might be fine for natural languages because people don’t really embed sophisticated logic structure in to a few sentences (because our brain are poor at keeping track of the logic!), but that’s not the case for programming languages. One must respect that programs have a rich, high-order structure which involves careful reasoning.</p>
+<p>[6] I do. I do it a lot because Standard ML is really good, especially because of its <a href="https://www.smlnj.org/doc/Compiler/pages/compiler.html" target="_blank" rel="noopener">visible compiler</a>.</p>
+<p>[7] A moment ago we were still talking about Object Oriented Programming and <a href="https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612" target="_blank" rel="noopener">Design Patterns</a>, then it’s <a href="https://en.wikipedia.org/wiki/Aspect-oriented_programming" target="_blank" rel="noopener">Aspect Oriented Programming</a>, followed by Model-View-Controllers (and derivatives like MVVM). If you haven’t heard of any of them, then it proves my point exactly. </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CMU/" rel="tag"># CMU</a>
+              <a href="/tags/Teaching/" rel="tag"># Teaching</a>
+              <a href="/tags/Programming-Languages/" rel="tag"># Programming Languages</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/20/intern2019/" rel="prev" title="Parallelism on Its Own Feet: 90 Days as an NVidia Intern">
+      <i class="fa fa-chevron-left"></i> Parallelism on Its Own Feet: 90 Days as an NVidia Intern
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/24/312f19p2/" rel="next" title="Foundations of Programming Languages: A TA's Perspective (Part 2/2)">
+      Foundations of Programming Languages: A TA's Perspective (Part 2/2) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Course-amp-its-Philosophy"><span class="nav-number">1.</span> <span class="nav-text">The Course &amp; its Philosophy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Working-with-Bob"><span class="nav-number">2.</span> <span class="nav-text">Working with Bob</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yue Yao" src="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+  <p class="site-author-name" itemprop="name">Yue Yao</p>
+  <div class="site-description" itemprop="description">He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tripack45" title="GitHub → https://github.com/tripack45" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:patrick.yaoyue@gmail.com" title="E-Mail → mailto:patrick.yaoyue@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://peiyuanqi.me/" title="https://peiyuanqi.me/" rel="noopener" target="_blank">Peyuan Qi's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zzhou612.com/" title="https://zzhou612.com/" rel="noopener" target="_blank">Nathan Zhou's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://me.xlk.me/" title="https://me.xlk.me/" rel="noopener" target="_blank">Luke Xuan's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nomadtype.ninja/" title="https://nomadtype.ninja/" rel="noopener" target="_blank">Tony Su's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zhxchen17.github.io/" title="https://zhxchen17.github.io/" rel="noopener" target="_blank">ZhxChen17's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://c-t-a.me/" title="https://c-t-a.me/" rel="noopener" target="_blank">Tong'an Cai's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jasonqsy.github.io/" title="https://jasonqsy.github.io/" rel="noopener" target="_blank">Jason Qian's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.gaotong.rocks/" title="https://blog.gaotong.rocks/" rel="noopener" target="_blank">Tong Gao's Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yue Yao</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8aeee2a1b4553a" async="async"></script>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Patricium.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://tripack45.github.io/2019/12/23/312f19p1/",
+            identifier: "2019/12/23/312f19p1/",
+            title: "Foundations of Programming Languages: A TA's Perspective (Part 1/2)"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Patricium.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+</script>
+
+</body>
+</html>

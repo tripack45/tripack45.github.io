@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/icon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/icon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/icon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://tripack45.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="This is the second part of the previous post.">
+<meta name="keywords" content="CMU,Teaching,Programming Languages">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Foundations of Programming Languages: A TA&#39;s Perspective (Part 2&#x2F;2)">
+<meta property="og:url" content="https://tripack45.github.io/2019/12/24/312f19p2/index.html">
+<meta property="og:site_name" content="Patricium">
+<meta property="og:description" content="This is the second part of the previous post.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tripack45.github.io/images/pfpl_bot.jpg">
+<meta property="og:updated_time" content="2021-05-06T21:57:52.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Foundations of Programming Languages: A TA&#39;s Perspective (Part 2&#x2F;2)">
+<meta name="twitter:description" content="This is the second part of the previous post.">
+<meta name="twitter:image" content="https://tripack45.github.io/images/pfpl_bot.jpg">
+
+<link rel="canonical" href="https://tripack45.github.io/2019/12/24/312f19p2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Foundations of Programming Languages: A TA's Perspective (Part 2/2) | Patricium</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Patricium</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">He had three chairs.</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-tasks"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-resume/cv">
+
+    <a href="/cv" rel="section"><i class="fa fa-fw fa-pencil"></i>Resume/CV</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tripack45.github.io/2019/12/24/312f19p2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+      <meta itemprop="name" content="Yue Yao">
+      <meta itemprop="description" content="He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patricium">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Foundations of Programming Languages: A TA's Perspective (Part 2/2)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-24 23:00:00" itemprop="dateCreated datePublished" datetime="2019-12-24T23:00:00+00:00">2019-12-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/" itemprop="url" rel="index">
+                    <span itemprop="name">Life</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/Thoughts/" itemprop="url" rel="index">
+                    <span itemprop="name">Thoughts</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/12/24/312f19p2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/24/312f19p2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/pfpl_bot.jpg" alt="Part of the cover of the text book &quot;Practical Foundations of Programming Languages&quot;"><span class="image-caption">Part of the cover of the text book &quot;Practical Foundations of Programming Languages&quot;</span></p>
+<p>This is the second part of the previous post.</p>
+<a id="more"></a>
+<h1 id="Skills-vs-Ideas"><a href="#Skills-vs-Ideas" class="headerlink" title="Skills vs. Ideas"></a>Skills vs. Ideas</h1><p>There are 4 ways through which the instruction team interacts with the students substantially: through lectures, materials (books, slides), homeworks, and exams [1]. Those are the 4 main sources where students learn new things. I’m leaving out discussion boards like Piazza because usually they are most effective for homework hints/clarifications. Development of any major idea would require page long discussions, which is not very common on Piazza.</p>
+<p>For the starter, we need to talk about the homeworks.</p>
+<p>Very often the CS courses, especially systems courses are dedicated to teaching people skills. The story usually goes: “oh there exists this new cool system and in this semester we are going to first learn about how its build and then how to characterize its performance/resource usage, etc.”. In other words, we explain what things are in an eliminative fashion, and expects students to be experts about the topic. </p>
+<p>In particular, homeworks usually requires students to either work with these new toys they learned about, or to implement those new toys themselves (or a combination of those). Case in point include:</p>
+<ul>
+<li>In <em>15-418 Parallel Architecture &amp; Programming</em>, students are required to implement an algorithm using MPI in project 4. <em> In </em>15-440 Distributed Systems*, students are required to implement a reduced version of Raft consensus protocol.</li>
+<li>In <em>Assignment 5</em> of this course, students are required to implement the language MPPCF and write code with it. </li>
+</ul>
+<p>How does those homeworks serve our goal? Unfortunately not as well as we was hoping for.</p>
+<p>Homework in this course mainly takes one of the following forms:</p>
+<ul>
+<li><em>Implementation Questions</em>: Read the judgments and implement a typechecker and an interpreter for a particular educational language (parser is provided).</li>
+<li><em>Programming Questions</em>: Program with the language you just learned.</li>
+<li>Proof about type safety (mostly in the first half of the course).</li>
+<li>Translating/elaborate code from one language into the other.</li>
+</ul>
+<p>Safety proofs do help student understand the formalism, because to prove the safety you have to understand how the type system induces / restricts the semantics of the language. But there are a few problems. 1) They get lengthy quickly when the language gets complicated. 2) It only work if the student is actively engaged in the proof, i.e., student really try hard to justify the validity of their proof at every step. 3) Feedback to the student is inefficient: A TA has to grade it manually and with extra care, the student have to read the comment and think about it. 4) TAs must know very well how things are supposed to work. As a TA myself, I found that 1) I don’t always read the feedback on the proof I submitted 2) A few proofs I submitted are actually bogus, and my TAs either missed them or just being nice so they chose to not point them out 3) Proofs on the reference solution sometimes doesn’t make sense. There’s not much we can do about it, except probably trying to mechanize the proofs somehow?</p>
+<p>One might think that being able to implementing a language according to the judgment certainly means the person have a pretty good grasp on the formalism for that language. Unfortunately this is not always the case. Students do learn about the fundamentals in the first few assignments (e.g. students learn a lot using typing judgments to describe a language and SOS for dynamics in the first 3 homeworks), but very soon implementing the language becomes a no-brainer once you have all the judgments around. In fact, a number of students completed the implementation question for MPPCF/Concurrent Algol without even looking at the judgments. This is mainly because people’s intuition are usually very good at this point, and an implementation that follows the intuitions is the usually a correct one. Formalism on the other hand, concerns more about consolidating one’s intuition into concrete, provable forms. </p>
+<p>Programming questions are perhaps the least effective ones in terms of teaching people about formalisms. I’m not suggesting that they are useless, on the other hand, they are perfect for answering the “why do we care” type of questions. They show that commonly known constructs all boil downs to a few simple ideas, and are nice baits to keep people interested. They are also good for relating the theoretical models we learned into real-life languages. Unfortunately they are terrible at teaching people about formalisms, because they are not designed to do so. </p>
+<p>On a second note, programming questions becomes extremely ineffective if they are done in a hurry because the person completing them will not have time to ponder on the implications of the things they are required to program. Thankfully, as we all know, no student will ever leave their two-weeks homework to the last 24hrs :-) [2]. When done in a hurry, programming questions teaches only skills, not ideas. That might be a good thing for, say 15-618, because those skills are also demanded on the job markets. Unfortunately, students clearly don’t get to program in KPCF on the job, and those skills themselves become useless. This might frustrate some students, and is not what we want to do.</p>
+<p>The last 2 homeworks contains nothing but implementation/programming questions. HW4 contains very few theory related questions. In general student get less training in terms reasoning with formalism, yet the formalism in fact gets much harder and diverse the second half of the course.</p>
+<p>The translating / elaboration problems are honestly my favorites (and gave me the worst nightmare when I was a student). The translation problem in the second homework gave me a chance to practice writing down the judgments and write the implementations according to the judgments I defined on my own. I went back and forth between the judgments I devised and the implementation. The process is valuable because formalism, like any other things, is best learned through practice. We honestly should have more of those questions [3].</p>
+<h1 id="Other-Means-of-Instruction"><a href="#Other-Means-of-Instruction" class="headerlink" title="Other Means of Instruction"></a>Other Means of Instruction</h1><h2 id="The-Exams"><a href="#The-Exams" class="headerlink" title="The Exams"></a>The Exams</h2><p>I did a few exam questions this semester. In the midterm I wrote the question on DFAs and existential type. For the final I wrote the entire short questions problem. As it turns out, the short questions problem is the problem with the lowest mean (mean is almost half of other problems), and its not because that the questions are hard. A large portion of the questions are true-or-false-and-why questions. As it turns out, none of the statements we provided are true. Now the interesting move I made is adding a twist for every claim. Instead of just bringing out the claim, we also included a false justification, a justification that looks clever, but is really just nonsense. People fall for it. </p>
+<p>Unfortunately, judging by the results of the exam we didn’t really do very well on that matter. </p>
+<p>I believe we should not only discuss “good” ideas, we should also discuss “bad” ideas. It is much like vaccination: by exposing people to pitfalls and common misunderstanding, people find out about their confusion and learn to wield the power they have against false claims, by pointing out where exactly they missed the point.</p>
+<p>It might also be beneficial to include questions that requires an open ended solution in the homework. We want to have questions that includes a design component, where people starts with intuition then putting intuitions into concrete forms by formalizing them. Then we discuss whether such language designs are safe, and how they interact with existing features. Bob believe it would be really beneficial to include a project of sort as the last homework, where students visit his office and spend an hour debating and discussing specific design choices. Unfortunately those projects are hard to grade.</p>
+<h2 id="The-Lecture"><a href="#The-Lecture" class="headerlink" title="The Lecture"></a>The Lecture</h2><p>Bob’s lecture is well-known for being hard to follow. Don’t get me wrong, I’m not saying Bob is a terrible teacher, but it is true many students find it hard to follow the lecture. On the contrary, you only realize how much clarity Bob brings into the discussion, when you already have some experience with the topic. There are a number of reasons behind this situation:</p>
+<ul>
+<li><p>Implicit assumptions about students’ background. One particular question I constantly get, even right before the finals, is “what is the meaning of $\nu$ in $\nu(t.1+t)$ (or $\nu~\Sigma~\{m~||~\mu\}$)”. For someone who have worked with formalism, this question itself makes no sense, because we understand that judgments are “pattern matched” and it’s the entire construct that carries a concrete meaning. However, students need clarification, which brings the second point:</p>
+</li>
+<li><p>We hope students raise questions right at the place they feel lost, but it’s almost never the case. When students can’t understand something, they very seldom raise questions. Futhermore, it is often not because they are afraid of looking stupid, contrary to common belief. Other reasons include 1) they expect (hope) that their question to be addressed shortly after, and the instructor simply moved on; 2) they are unable to formulate the question properly (we TAs see this a lot in OHs, in fact the solutions is trivial once the question is properly formulated), i.e. “I don’t even know where I got lost / unable to put things in context”; 3) knowing that its probably going to take around 5-10 minutes to fully explain the matter, the student decide to save the question for later (and forgot about it eventually) so that he/she will not “waste other students’ time”. This happens a lot when a student raise a question and got an unsatisfying answer, and the student simply stops asking follow up questions. </p>
+</li>
+<li><p>Effects of taking notes. Believe it or not, note taking consumes one’s scarce mental resource. When you are trying to copy things down from the board, your mind will be focused on copying things down in exact form, and nothing else. This style of note taking is usually counterproductive, as many people have already pointed out. The right way is to take down only the “main points” and “critical rules”, companied by a small set of examples. However, this requires the student to be able to follow the instructor closely, and more importantly maintain a big picture for the entire development of idea (so he knows when a “main point” is being made). Unfortunately, this is an ability that is rarely found in the population, and honestly I can’t do it.</p>
+</li>
+<li><p>It takes time to familiarize oneself with new formalism. I experienced this first-hand last year. When Bob introduce a new construct on the blackboard, it takes time to familiarize myself with the new syntax and the typing judgment (we are talking about hours here). This becomes a problem when Bob starts to write down terms using the new construct. Keeping track of the typing rules and/or dynamics in realtime is hard, especially without the help of sufficient type annotations. One way to improve this is to annotate the types of the term. Doing this gives student’s an opportunity to catch up, at the same time learn to typecheck the new construct. </p>
+</li>
+<li><p>The final point relates to how Bob tends to answer questions. Bob tends to answer questions by re-iterating what is right, instead of challenging student’s idea by pointing out what is wrong. This, of course, makes the conversation less contentious, yet also leaves the huge responsibility of figuring out what is wrong with their understand (other than being “different” then the correct understanding) to the student. Unfortunately, only very few students succeed in doing so (the ones that do succeed could potentially become good researchers). When students fail at doing so, very often they just try to memorize “the correct understanding” or just give up entirely. As a TA, I observed this in a lot of situations. Very often Bob and the student are talking about different things (e.g., the lecture on continuations where Bob wrote an incorrect implementation on the board and got caught by multiple students).  To make things worse, students very often cannot accurately articulate their ideas for various reasons (e.g., mentioning “parallelism” when they really mean “executed using a SMP processor”), and in general people with a prior misunderstanding are much harder to be convinced than someone who simply doesn’t understand the material. From my own experience, answering questions is more about helping the person formulate/scope the issue, instead of simply providing the solution. It’s more about getting rid of the misunderstanding, instead of simply asserting the truth. </p>
+</li>
+</ul>
+<h2 id="The-Book-and-The-Supplements"><a href="#The-Book-and-The-Supplements" class="headerlink" title="The Book and The Supplements"></a>The Book and The Supplements</h2><p>Believe it or not, although this course has been offered over a decaded, the course content is still under active development, meaning the instructor make changes to the order of instruction, the material and they way they are presented every year. This is good for the course apparently, but an unintended side-effect of doing so is that we no longer have an authoritarian source of information for the students to use as a reference. In particular, Bob teach the book in different order, omitting certain contents from the book, changes how some material is presented on the book, and in some extreme cases mix and matches contents from different chapters. This leads to an unfortunate situation where students struggle to find a reliable source to resolve their confusions. It should be emphasized that none of the changes are corrections in the sense that the original presentations in the book is “wrong”. Most of them are equivalent presentations of the same idea, which have different flavors or technical advantages. </p>
+<p>Students have a few textual sources to resolve their confusions: 1) Their notes 2) The textbook “Practical Foundations of Programming Languages” and 3) The “supplements” which are considered to be sometimes patches to the book / partial lecture notes. First of all, not every student is a good note-taker: taking notes while following the lecture is super-hard, and notes are not always reliable: very often we took down incorrect information either because we made a mistake, or perhaps the professor made a mistake on the board and we are unable to spot it because we already have trouble understanding the material! To clarify those confusions, our second resort would be book. This is where things gets tricky. The book very often uses a different presentation of the same material [4], which doesn’t directly address the confusion. To make things worse, the related material may scatter across different chapters [5]. We are left with two ways forward: </p>
+<ul>
+<li>We try to piece together things on our own, leaving aside the book, based on our intuition for the subject matter. I took this approach last year, and it is hard as hell.</li>
+<li>We study the presentation on the book, forget about the presentation on the notes for now. Once we built the intuition, we go back and correct the notes. While this might ends up further one’s understanding by a lot, it’s time consuming and honestly a horribly lonely journey.</li>
+</ul>
+<p>The status quo is really far from ideal. Yet I don’t immediately see a way to improve it: the course has to keep developing because most of the materials covered are fairly new [6]. Unlike things like calculus, which have been taught for decades if not centuries, we don’t really know what is the optimal way of teaching it [7]. So yes, inevitably, we have to make modifications every year.</p>
+<p>The supplements and homeworks makes things a little bit better. Supplements often clarifies a particular setup in a concise documents. Related rules are often bundled together. Homeworks, on the other hand, are self-contained presentations of different systems.</p>
+<h1 id="Short-Conclusions"><a href="#Short-Conclusions" class="headerlink" title="Short Conclusions"></a>Short Conclusions</h1><p>Teaching 15-312 is absolutely fun. I would recommend the experience to whoever with the qualifications and opportunities. </p>
+<hr>
+<p><em>Footnotes:</em></p>
+<p>[1] Believe me, student do <strong>learn</strong> things from the exams. Some the most memorable things one would learn in a course actually comes from the exam questions. I know this because I do.  </p>
+<p>[2] It’s not our fault if a student failed to learn anything valuable if they decided to finish all his/her homework in the last 24-hrs, but in the end, pointing fingers doesn’t improve the situation at all. We either find a way to stop student from doing this (unlikely) or we can try to design things around it. Final piece of advice: leave the “learning a skill” type of courses to the end if you have to choose.</p>
+<p>[3] And being able to in some sense define a language is much more fun!</p>
+<p>[4] Case in point: This semester we presented PCF in the modal separated fashion, which is cleaner in theory. The book, however didn’t introduce modality until like 10 chapters later. </p>
+<p>[5] Case in point: <em>Dynamic Classification</em> depends on the notion of <em>symbols</em> (and <em>symbol contexts</em>), which is introduced in a different chapter. The subtle yet central idea around symbols (alpha-conversions) goes all the way back to the <em>first chapters</em>. I doubt anyone could realize the ramifications when they read about alpha-conversion in the first chapter.</p>
+<p>[6] E.g: the central idea of type soundness (type safety, <em>progress</em> and <em>preservation</em>) is first proposed in early 1990s!</p>
+<p>[7] One can even say that it’s unsettled debate on how to define programming languages. What we learned today might not be the optimal way of understanding programming languages.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CMU/" rel="tag"># CMU</a>
+              <a href="/tags/Teaching/" rel="tag"># Teaching</a>
+              <a href="/tags/Programming-Languages/" rel="tag"># Programming Languages</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/23/312f19p1/" rel="prev" title="Foundations of Programming Languages: A TA's Perspective (Part 1/2)">
+      <i class="fa fa-chevron-left"></i> Foundations of Programming Languages: A TA's Perspective (Part 1/2)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/17/a-case-for-pc/" rel="next" title="A Case for Political Correctness">
+      A Case for Political Correctness <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Skills-vs-Ideas"><span class="nav-number">1.</span> <span class="nav-text">Skills vs. Ideas</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-Means-of-Instruction"><span class="nav-number">2.</span> <span class="nav-text">Other Means of Instruction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Exams"><span class="nav-number">2.1.</span> <span class="nav-text">The Exams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Lecture"><span class="nav-number">2.2.</span> <span class="nav-text">The Lecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Book-and-The-Supplements"><span class="nav-number">2.3.</span> <span class="nav-text">The Book and The Supplements</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Short-Conclusions"><span class="nav-number">3.</span> <span class="nav-text">Short Conclusions</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yue Yao" src="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+  <p class="site-author-name" itemprop="name">Yue Yao</p>
+  <div class="site-description" itemprop="description">He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tripack45" title="GitHub → https://github.com/tripack45" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:patrick.yaoyue@gmail.com" title="E-Mail → mailto:patrick.yaoyue@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://peiyuanqi.me/" title="https://peiyuanqi.me/" rel="noopener" target="_blank">Peyuan Qi's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zzhou612.com/" title="https://zzhou612.com/" rel="noopener" target="_blank">Nathan Zhou's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://me.xlk.me/" title="https://me.xlk.me/" rel="noopener" target="_blank">Luke Xuan's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nomadtype.ninja/" title="https://nomadtype.ninja/" rel="noopener" target="_blank">Tony Su's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zhxchen17.github.io/" title="https://zhxchen17.github.io/" rel="noopener" target="_blank">ZhxChen17's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://c-t-a.me/" title="https://c-t-a.me/" rel="noopener" target="_blank">Tong'an Cai's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jasonqsy.github.io/" title="https://jasonqsy.github.io/" rel="noopener" target="_blank">Jason Qian's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.gaotong.rocks/" title="https://blog.gaotong.rocks/" rel="noopener" target="_blank">Tong Gao's Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yue Yao</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8aeee2a1b4553a" async="async"></script>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Patricium.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://tripack45.github.io/2019/12/24/312f19p2/",
+            identifier: "2019/12/24/312f19p2/",
+            title: "Foundations of Programming Languages: A TA's Perspective (Part 2/2)"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Patricium.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/icon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/icon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/icon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://tripack45.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="IntroductionDuring the summer of 2019, I took an internship at NVidia’s Austin campus working with one of their CUDA compiler teams. Two teams of engineers there work on compiler related projects: the">
+<meta name="keywords" content="Internship,NVidia,CUDA,Compiler,Parallelism">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Parallelism on Its Own Feet: 90 Days as an NVidia Intern">
+<meta property="og:url" content="https://tripack45.github.io/2019/10/20/intern2019/index.html">
+<meta property="og:site_name" content="Patricium">
+<meta property="og:description" content="IntroductionDuring the summer of 2019, I took an internship at NVidia’s Austin campus working with one of their CUDA compiler teams. Two teams of engineers there work on compiler related projects: the">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-05-06T21:57:52.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Parallelism on Its Own Feet: 90 Days as an NVidia Intern">
+<meta name="twitter:description" content="IntroductionDuring the summer of 2019, I took an internship at NVidia’s Austin campus working with one of their CUDA compiler teams. Two teams of engineers there work on compiler related projects: the">
+
+<link rel="canonical" href="https://tripack45.github.io/2019/10/20/intern2019/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Parallelism on Its Own Feet: 90 Days as an NVidia Intern | Patricium</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Patricium</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">He had three chairs.</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-tasks"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-resume/cv">
+
+    <a href="/cv" rel="section"><i class="fa fa-fw fa-pencil"></i>Resume/CV</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tripack45.github.io/2019/10/20/intern2019/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+      <meta itemprop="name" content="Yue Yao">
+      <meta itemprop="description" content="He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patricium">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Parallelism on Its Own Feet: 90 Days as an NVidia Intern
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-20 03:52:50" itemprop="dateCreated datePublished" datetime="2019-10-20T03:52:50+00:00">2019-10-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index">
+                    <span itemprop="name">Tech</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Experience/" itemprop="url" rel="index">
+                    <span itemprop="name">Experience</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/10/20/intern2019/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/20/intern2019/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>During the summer of 2019, I took an internship at NVidia’s Austin campus working with one of their CUDA compiler teams. Two teams of engineers there work on compiler related projects: the <em>compiler verification</em> team and the <em>compiler development</em> team. The compiler verification team ensures the correctness and consistent behavior of the CUDA compiler toolchain for a large number of applications on all platforms. The development team is in charge of the in-driver CUDA assembler, publicly known as <code>ptxas</code>. I worked under the supervision of Brian Deitrich, and mentored by Rishkul Kulkarni.</p>
+<a id="more"></a>
+<p>The compilation of CUDA code (and shader code) involves a rather complicated pipeline. Take the CUDA code as an example. The CUDA source code is first compiled and optimized using an LLVM based front-end compiler, namely <code>nvcc</code>. The NVCC compiler treats CUDA code as if they were just regular sequential code and produces an intermediate representation as an output. The intermediate representation is referred to as <code>ptx</code> code in publicly available documentations. The code for graphics shaders are compiled to <code>ptx</code> in a similar fashion. <code>ptx</code> code is directly embedded as textual strings into binaries, forming what is publicly known as <code>fatbin</code>s. When the program launches, <code>ptx</code> is <em>Just-In-Time (JIT)</em> compiled to machine code in the driver through an <em>optimizing code generator (OCG)</em>. OCG is both architectural aware and CUDA semantics aware: it’s where synchronization and most of the CUDA optimization happens. OCG is mainly written in traditional C++. The compiler development team, also known as the OCG team, is responsible for developing and maintaining the OCG compiler. </p>
+<p>During my Internship at NVidia, I formulated and implemented a way to evaluate the performance of CUDA programs almost statically. This work opens up several possibilities for the team. It helps engineers to debug performance issues by presenting a number of “suspect code segments” to focus on. It potentially allows the compiler to optimize programs and make trade-offs in a case-by-case manner.  Moreover, it helps the graphics team to identify the most time-consuming shaders from a large number of candidates.</p>
+<h1 id="The-OCG-Compiler"><a href="#The-OCG-Compiler" class="headerlink" title="The OCG Compiler"></a>The OCG Compiler</h1><p>The OCG team has a unique and crucial technical standpoint in the company: every piece of code that runs on the GPU inevitably needs to go through OCG. This has many implications. First of all, the performance of the assembly emitted impacts the performance of all applications, and very often the OCG team has to make various trade-offs very carefully. Secondly, the OCG team works with the architectural design team very closely. NVidia has a long history of hardware-software co-design: instead of trying to embed more and more complicated logic into the hardware, like what Intel has been doing for decades, NVidia architectural teams work with OCG team to allocate various responsibilities to places that make the most sense. As an example, CUDA is a parallel programming language in that it describes the behavior of a large number of CUDA threads, which involves how these threads are synchronized. The responsibility of ensuring correct synchronization of CUDA threads are separated in to two places: the GPU provides hardware synchronization primitives, and the OCG team figures out places to insert the synchronization primitives based on its knowledge of the entire code structure (Although technically this design is not documented anywhere on publicly available design white-papers, this information is widely available due to the consistent effort of reverse engineering OCG compiler made by developer community.). This design allows the compiler to avoid performing synchronization at all for a small chunk of code, and to replace explicit synchronization with predication if the overhead of synchronization overweighs the actual computation. This architectural-compiler co-design in some sense the secret sauce of NVidia’s success: it not only free the architectural team from the burden of maintaining backward compatibility, but also allow existing <code>ptx</code> code to take advantage of new features of more recent hardware automatically when it’s JIT-compiled using \ptxas in a new driver. </p>
+<p>On the other hand, this software-hardware co-design has an Achilles heel: the responsibility of ensuring good performance is greatly shifted to the compiler. Therefore, it’s hard to maintain a uniformly good performance across the board exactly because program performance depends on how effective optimization phases are. Moreover, the compiler needs to set a large number of performance-related parameters (termed <em>knobs</em> internally (More like semi-internally. A simple <code>strings ptxas</code> exposes almost all knobs.)) based on its knowledge of the targeting hardware along with its understanding of the code in question.  Unfortunately, the same set of knobs very seldom works for all programs. As a solid example, one of such knob controls register usage. Spilling a register increases latency by hundreds of cycles. However, since hardware registers are shared among threads, spilling potentially allows more threads to run in parallel. Increased parallelism could hide the extra latency and improve performance. As you would imagine, whether we should spill the register depends on the program in question. </p>
+<p>Instead of using the same set of parameters for all programs, it would make sense to allow the compiler to pick a set of knobs specifically for every program (if not code section) it compiles. This turns out to be extremely hard: since CUDA programs are parallel programs running on a throughput oriented architecture, merely predicting program performs is hard  (Believe me, the OCG team has spent a tremendous amount of effort on trying to predict shader performance. I can’t disclose the details but it’s fair to say most, if not all, of the efforts, failed quite miserably.). To make things worse, performance CUDA programs, which are parallel programs, is largely determined by how well parallelism is exploited, which very often depends on how the input looks like. In conclusion, the real challenge lies in the fact good parameters have to be chosen by understanding the programs’ run-time behavior statically. </p>
+<h1 id="Reasoning-Performance-Almost-Statically"><a href="#Reasoning-Performance-Almost-Statically" class="headerlink" title="Reasoning Performance (Almost) Statically"></a>Reasoning Performance (Almost) Statically</h1><p>As stated earlier, it became my challenge to find a way to extract performance-related information statically. The key thing to notice here is the notion of “performance-related information”. It’s not about cycle count. Trying to predict cycle count (or absolute run-time) without input data is a quest doomed to fail for obvious reasons: actual cycle count depends strongly on the shape and size of the input. For the same reason, it’s uninteresting for compiler engineers. What will be interesting for compiler designers, is more about “constituents” of overall cycle count. Answers to questions like “Is this loop latency bound or throughput bound?” and “Does this conditional branch contribute to overall latency bound” can significantly impact the register allocation strategy among some other knobs. Performance-related information involves more than cycle counts. CUDA programs run on GPU stream processors in a SIMD style. Program performance depends greatly on the utilization rate of each SIMD instruction executed. Predicting utilization involves predicting divergence and synchronization. Thanks to Compiler-Architectural co-design, the compiler determines (and is fully aware of) the synchronization structure of the program. This made my life much easier.</p>
+<p>Without going into too much detail, what I proposed is to find a way to represent the <em>control flow graph</em> (CFG) of a program in an algebraic form, taking into account synchronization and divergence within a single stream processor. There’s generally no communication whatsoever between stream processors. Basic blocks are atomic “numerals” in this algebraic representation, and algebraic operators capture the control and synchronization structure of the CFG. Then I derived several “performance invariant” transformations to allow simplifications on the algebraic form. By annotating performance-related parameters on the operators and keep tracking these annotations during simplification, we may compute performance metrics for any given region of the program. The work contains “almost” in its title because the initial performance annotations need to be provided by the programmer (e.g., how likely is the branch taken). Those annotations do not need to be accurate for the algorithm to be effective. I implemented the work in C++ as an extra optimization pass of the OCG code-base.</p>
+<p>Many CMU courses helped me to come up with the idea. <em>15-618 Parallel Architecture and Programming</em> provided me with essential knowledge of GPU architecture. The CUDA programming assignment taught me well about what is it that I’m up against. <em>15-745 Optimizing Compiler for Modern Architectures</em> discussed instruction scheduling and data flow analysis in detail. It turns out CUDA architecture, as an in-order architecture, relies on instruction scheduling to maintain even reasonable performance. <em>15-652 Foundations of Programming Languages</em> proved to be surprisingly helpful. Fundamentally, the algebraic representation treats each of the basic block as a continuation. The algebraic representation and transformations are just manipulation of a program written in continuation-passing style. The idea of keeping track of performance annotations is derived from cost models used in the analysis of parallel programs. In my opinion, this serves as proof of how well-formulated theory could provide insight into the practice.</p>
+<h1 id="Internship-Experience"><a href="#Internship-Experience" class="headerlink" title="Internship Experience"></a>Internship Experience</h1><p>The style of work I did during the summer is quite different than the daily work of other engineers on the team. It became quite apparent after once or twice Monday all-hands meetings. My work is more of a research project. It was both my and Brian’s intention to pick a rather self-contained project as my intern project.  Daily work in the team usually involves bug fixes and various feature requests. Most of the feature requests are purely “functional” in the sense that a correct and reasonably performant straight forward implementation is sufficient. Once a month, an engineer may be put in charge of a project that requires a significant amount of designing and coordination with other teams. Needless to say, this type of change has a huge risk since it may impact the performance of the generated code. Any performance regression (especially on commercial benchmarking test suites such as 3D-Mark) may be picked by media as a design failure of the graphics hardware, unfortunately. This makes iterating the OCG compiler especially hard. Yet let’s just say there were still several pretty ambitious projects going on when I left the team  ( Unfortunately, I cannot disclose what they are.). </p>
+<p>The OCG code-base and workflow is much more “traditional” compared with any other Tech company. For example, the entire code base is managed by <em>Perforce</em> instead of <code>git</code>; OCG code is written in pre-2011 C++. It forbids the usage of STL containers for compatibility with some almost obsolete platforms. The coding guideline explicitly banned the usage of destructors, which makes modern style C++ resource management virtually impossible (The Resource Allocation Is Instantiation idiom). The code-base is currently in the process of upgrading to C++ 11, many restrictions are gradually being dropped. </p>
+<p>The OCG code base is an epitome of “path dependence”[1] in software engineering. OCG was once part of a kernel space driver. Dynamic memory management is especially tricky in kernel space. All class constructors and functions using dynamic allocation have to take an extra argument specifying which memory pool it is allocating from. Later on, when the compiler was factored out to user space, the memory allocation protocol remains part of the code, forcing future code to operate in a similar fashion. This design is prone to all sorts of memory management issues. Later on, a solution comes along. First, set up a local memory pool for each pass, then in each pass, the programmer just keeps allocating memory from the local pool without worrying about freeing anything. At the end of each pass, free everything in the pool. This strategy works just fine for most of the passes (Most analysis and transformations consume space proportional to code size.). Unfortunately, it doesn’t work for my purpose. I end up implementing my own reference counting pointers to free myself from tedious memory management. The team is quite open to these new techniques. It feels nice to be able to bring fresh ideas to a decade-old code-base. </p>
+<p>The OCG team is quite different in terms of its personnel compared with other teams in the tech industry. <a href="https://www.bizjournals.com/austin/news/2019/10/18/turnover-stats-revealed-for-apple-facebook-oracle.html" target="_blank" rel="noopener">Facebook has an average career turnover of 2.6 yrs</a>. An average OCG team employee worked at least 5 yrs on the project. Half of the engineers on the team hold a Ph.D. degree in fields related to compiling technologies. Honestly, I have mixed feelings for this. On the upside, the team is quite effective in that every member understands the implications of various design choices. Team discussions are often direct, to the point, and in no lack of creativity. On the other hand, this suggests the industry demand for highly skilled PL specialists is quite low, which made me question my career choice as a PL specialist. </p>
+<p>I had the opportunity to discuss with Brian whether a Ph.D. degree is worthwhile. Brian holds a Ph.D. degree from UIUC. He worked with the <a href="http://impact.crhc.illinois.edu/" target="_blank" rel="noopener">IMPACT group</a>. For Brian the Ph.D. program was a game-changer: it allowed him to switch track from an EE engineer to a software engineer. He believes the benefit of a doctoral degree for a professional career is mainly about opening up new possibilities. A doctoral degree qualifies the holder for almost any technical work in his field of interest, allowing the holder to choose a work that feels worthwhile for his effort. I find this point of view honest and practical. </p>
+<h1 id="Parallelism-on-Its-Own-Feet"><a href="#Parallelism-on-Its-Own-Feet" class="headerlink" title="Parallelism on Its Own Feet"></a>Parallelism on Its Own Feet</h1><p>There is one thing that I felt deeply unsatisfied during my summer at NVidia. It’s not about the company or the job. It’s when I realized how insufficient our toolbox felt when we try to reason about parallel programs. Nowadays multi-core parallelism is built into almost every computing device, yet we still treat parallel programs as if they were simply sequential programs extended with a few library calls. I believe it’s time for parallel programs to stand on their own feet.</p>
+<p>Take the idea of CFG as an example. In OCG, we represent large scale parallel programs using CFGs, and struggle to prove properties of parallel behavior with it (e.g., synchronization correctness). The resulting algorithm is far from optimal and cryptic to understand. It’s very easy to understand why: properties of a sequential code can be easily tied to the value of the program counter, so to speak. However, there is no way to describe the state of a parallel program by just looking at the program counters of different threads: how instructions are interleaved across processors also affects the resulting program state. I would argue CFGs as an abstraction for parallel programs, is fundamentally lacking. </p>
+<p>Our toolchain for parallel programs is also lacking. Debuggers in a parallel setup are confusing: what would single step even mean in a parallel setup? In what sense can you single-step a parallel program? To make things worse, debuggers are often useless in a parallel environment: simply attaching the debugger breaks the timing of events leading to the crash. Both cases suggest parallel programs are not a simple extension to sequential programs and trying to think about them sequentially simply won’t work.</p>
+<p>It’s time for parallel programs to move away from their sequential ancestors and stand on their own feet.</p>
+<p>[1] Path dependence explains how the set of decisions one faces for any given circumstance is limited by the decisions one has made in the past or by the events that one has experienced, even though past circumstances may no longer be relevant. <em>Our Love Of Sewers: A Lesson in Path Dependence</em>, Dave Praeger, 15 June 2008</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Internship/" rel="tag"># Internship</a>
+              <a href="/tags/NVidia/" rel="tag"># NVidia</a>
+              <a href="/tags/CUDA/" rel="tag"># CUDA</a>
+              <a href="/tags/Compiler/" rel="tag"># Compiler</a>
+              <a href="/tags/Parallelism/" rel="tag"># Parallelism</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/18/KyoAni/" rel="prev" title="京都动画的善与殇：京都动画纵火案之后">
+      <i class="fa fa-chevron-left"></i> 京都动画的善与殇：京都动画纵火案之后
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/23/312f19p1/" rel="next" title="Foundations of Programming Languages: A TA's Perspective (Part 1/2)">
+      Foundations of Programming Languages: A TA's Perspective (Part 1/2) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-OCG-Compiler"><span class="nav-number">2.</span> <span class="nav-text">The OCG Compiler</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reasoning-Performance-Almost-Statically"><span class="nav-number">3.</span> <span class="nav-text">Reasoning Performance (Almost) Statically</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Internship-Experience"><span class="nav-number">4.</span> <span class="nav-text">Internship Experience</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallelism-on-Its-Own-Feet"><span class="nav-number">5.</span> <span class="nav-text">Parallelism on Its Own Feet</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yue Yao" src="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+  <p class="site-author-name" itemprop="name">Yue Yao</p>
+  <div class="site-description" itemprop="description">He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tripack45" title="GitHub → https://github.com/tripack45" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:patrick.yaoyue@gmail.com" title="E-Mail → mailto:patrick.yaoyue@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://peiyuanqi.me/" title="https://peiyuanqi.me/" rel="noopener" target="_blank">Peyuan Qi's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zzhou612.com/" title="https://zzhou612.com/" rel="noopener" target="_blank">Nathan Zhou's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://me.xlk.me/" title="https://me.xlk.me/" rel="noopener" target="_blank">Luke Xuan's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nomadtype.ninja/" title="https://nomadtype.ninja/" rel="noopener" target="_blank">Tony Su's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zhxchen17.github.io/" title="https://zhxchen17.github.io/" rel="noopener" target="_blank">ZhxChen17's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://c-t-a.me/" title="https://c-t-a.me/" rel="noopener" target="_blank">Tong'an Cai's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jasonqsy.github.io/" title="https://jasonqsy.github.io/" rel="noopener" target="_blank">Jason Qian's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.gaotong.rocks/" title="https://blog.gaotong.rocks/" rel="noopener" target="_blank">Tong Gao's Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yue Yao</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8aeee2a1b4553a" async="async"></script>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Patricium.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://tripack45.github.io/2019/10/20/intern2019/",
+            identifier: "2019/10/20/intern2019/",
+            title: "Parallelism on Its Own Feet: 90 Days as an NVidia Intern"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Patricium.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+</script>
+
+</body>
+</html>

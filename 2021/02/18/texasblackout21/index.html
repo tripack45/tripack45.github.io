@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/icon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/icon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/icon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://tripack45.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="现在是2021年2月16日中午，家里完全停了电。目前我所在的Austin正处于一场前所未有的（有说122年一遇）的winter storm中。昨天气温达到了历史最低的零下18摄氏度，德州各地都发生了电网过载和随之而来的停电限电。">
+<meta name="keywords" content="Adventure,Natural disaster,City crisis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="德州2021冬季大停电纪实">
+<meta property="og:url" content="https://tripack45.github.io/2021/02/18/texasblackout21/index.html">
+<meta property="og:site_name" content="Patricium">
+<meta property="og:description" content="现在是2021年2月16日中午，家里完全停了电。目前我所在的Austin正处于一场前所未有的（有说122年一遇）的winter storm中。昨天气温达到了历史最低的零下18摄氏度，德州各地都发生了电网过载和随之而来的停电限电。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tripack45.github.io/images/water-outage-aus-2021.png">
+<meta property="og:updated_time" content="2021-05-06T21:57:52.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="德州2021冬季大停电纪实">
+<meta name="twitter:description" content="现在是2021年2月16日中午，家里完全停了电。目前我所在的Austin正处于一场前所未有的（有说122年一遇）的winter storm中。昨天气温达到了历史最低的零下18摄氏度，德州各地都发生了电网过载和随之而来的停电限电。">
+<meta name="twitter:image" content="https://tripack45.github.io/images/water-outage-aus-2021.png">
+
+<link rel="canonical" href="https://tripack45.github.io/2021/02/18/texasblackout21/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>德州2021冬季大停电纪实 | Patricium</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Patricium</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">He had three chairs.</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-tasks"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-resume/cv">
+
+    <a href="/cv" rel="section"><i class="fa fa-fw fa-pencil"></i>Resume/CV</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tripack45.github.io/2021/02/18/texasblackout21/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+      <meta itemprop="name" content="Yue Yao">
+      <meta itemprop="description" content="He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patricium">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          德州2021冬季大停电纪实
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-18 15:06:00" itemprop="dateCreated datePublished" datetime="2021-02-18T15:06:00+00:00">2021-02-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/" itemprop="url" rel="index">
+                    <span itemprop="name">Life</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/Adventure/" itemprop="url" rel="index">
+                    <span itemprop="name">Adventure</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/02/18/texasblackout21/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/02/18/texasblackout21/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>现在是2021年2月16日中午，家里完全停了电。目前我所在的Austin正处于一场前所未有的（有说122年一遇）的winter storm中。昨天气温达到了历史最低的零下18摄氏度，德州各地都发生了电网过载和随之而来的停电限电。</p>
+<a id="more"></a>
+<p>Austin说实在是非常温暖的城市。Austin的冬季是十分温和的，有时甚至会让人觉得过于热情了。一月中旬的时候，奥斯丁的最高气温还会时不时攀上20摄氏度。彼时距离农历新年还有一个月。这个春节本就因为人在异乡又遇上COVID-19而过的非常没有年味，我最后也只能希望至少能吃一顿火锅凑活一下就好了。一月中旬的我一心只盼着温度再降些，别把我最后的念想也夺走就好了。</p>
+<p>春节那周一场寒流从北方而下穿过北美的平原冲进了毫无防备的德州。周三下了一场冻雨，同事的车上结了一层无毫米厚的冰，整辆车都被封在了里面，仿佛海布拉山上的神庙。二月十四日初一，周五。明明是上班的日子却叫上了同一个小区的同事在四点偷偷溜了出去买火锅的食材。工作日下午的超市里挤了比一般周末还多的人，柜台上的火锅羊肉已经卖完了，只剩被人挑剩下的火锅牛肉了。虽然火锅缺了羊肉总感觉没了精神，但火锅腾腾的蒸汽与窗外飘着的雪相映衬，给这个是在不容易的冬天带来了可贵的年味。</p>
+<p>从周六开始，德州气温继续大幅下降。德州人民显然是不会过冬的。I35高速路上出现了大规模的<a href="">百车追尾事故</a>，路上就没有几辆车有配备防滑链。Twitter上有人说家里甚至没有冬季的衣服。新闻里零星地出现德州电力系统告急这样令人略感不安的消息。不过当时并没有多少人当真。公寓发了邮件希望大家把水龙头开一点防止管子冻炸（包括连着洗衣机的水龙头），不过我估计没有多少人照做的。</p>
+<p>周日白天奥斯丁依然无事发生。本地新闻说州内有城镇出现了断电。州长向联邦政府申请的Emergency declaration也被Biden Administration批准了。本地的电力公司通知马上就要进行rolling blackout[1]。尽管感觉马上要见证历史了，但感觉更多的其实还是兴奋而已。</p>
+<p>周一开始便是连续的停电。</p>
+<ul>
+<li>周一晚凌晨4点发生了第一次停电。停电时间超过了一个小时，具体多久未知。早晨醒来的时候发现家里电器上的时钟重置了，昨晚置于睡眠状态的台式机断了电。开机检查了连在NAS上的电源记录，得知4点左右后备电源进入了电池模式，并且在一个小时左右进入了低电量状态。心里非常庆幸给NAS配备了后备电源，不然频繁的掉电硬盘肯定已经挂了。</li>
+<li>周一晚上5点40分发生了第二次停电，这次停电时间一个半小时。五点四十恰好是晚餐时间，在到处都用电炉的地方，没了电连饭都没法烧。不过我马上发现了比这还麻烦的问题的：小区附近的移动基站和网络基础设施似乎都是接入同一套电力系统的，断电之后手机几乎收不到4G信号。再加上周围人一下子都纷纷开始用4G，我一下子感觉回到了GMS时代。在家里找了一个信号勉强可以接受的地方坐着刷了大概45分钟推特后，决定找同事开车出去买晚餐。翻箱倒柜发现我其实也没有准备过冬的衣服，想来匹兹堡的冬天一般都是靠着肥宅特有「寒冷防御1」加一件防寒服。无奈之下穿了一件hoodie外面再套上一件大衣裹得像粽子一样出了门。最深齐膝的雪看上去就只有薄薄一层，人行道沿掩埋在雪下看上去不小心就会踩空。走路的时候若不把脚提到膝盖那么高就会踢得雪到处都是。和同事坐进车后只敢以5mph的速度缓缓驶出。车轮压实雪发出了令人惶恐的声音，驾驶座上的同事紧张地表达了对于这台新车off road能力的赞赏。车刚开出小区大门，整个小区大门的景观灯一下子就全部亮了起来，像潜行游戏里任务失败了一样。一个半小时后供电恢复。</li>
+<li>周一晚12点11分，第三次停电，这次停电时间到一个小时10分钟。</li>
+<li>周二凌晨3点，6点，9点，根据NAS上的电源记录似乎各发生了一次停电。</li>
+<li>周二早10点38分，停电。此次停电时间约1小时40分钟。</li>
+<li>周二下午2点36分，停电，此次停电时间1小时10分钟。和同事借着停电，看看天气晴朗于是决定开车去附近的超市碰碰运气。平时短短的五分钟车程开了足足二十分钟。路面上全是积雪和被车压实成的冰，车子以10mph的速度爬过去，轮胎压在雪上发出瘆人的声音。一路上除了一个路口的信号灯，其他的信号灯全都完全断电了。道上根本看不到线，大家车开得都非常小心。周围的超市除了一家沃尔玛以外全都挂出了今日不营业的牌子。沃尔玛显然正在限流，门口排起了几十米的长队。</li>
+<li>周二晚8点50分，停电，此次停电时间50分钟。</li>
+<li>周三凌晨0点35分，停电，此次停电20分钟。夜间停电若干次。</li>
+<li>周三早8点05分，停电，此次停电1小时25分。9点36分再次停电，此次停电20分钟。起床后发现公寓切断了冷水（热水周三白天开始已经没有了）。同事说早晨7点收到了公寓的邮件，说奥斯汀南部的水站已经因为断电而下线了（然而我连邮件都没有收到），同时好像有主水管裂了。问了市里的其他同事也有不少说停水的。看来是大范围地停水了。</li>
+<li>周三下午1点整，停电。此次停电1小时30分钟。同事电话问了Home Depot说他们营业，本想试着去买点水的，结果下楼的时候摔了，似乎有些问题，于是只好作罢。我们统计了一下家中水的情况：我这里饮用水共5升，其中1升半咖啡和8瓶无糖可乐。同事家中有约14升的矿泉水，按照一人2升一天计算大约可以用5天不到一些，这期间多半停水问题能得以解决了。没有水的情况下做饭也比较艰难。首先洗碗是肯定不可能的了，所以要尽可能复用餐具和锅。菜应该也要尽可能选择不太消耗水的。需要焯水的菜还是应该避免。米和面应该都可以做，这些菜都会把水利用得很好。汤也可以考虑，喝汤也是补充水分的办法。烤箱菜也非常好，烤盘在铺好锡纸的情况下清理非常容易。</li>
+<li>周三下午7点整，停电。此次停电时间约1小时30分钟。</li>
+<li>周三晚8点47分，收到电力公司邮件。PEC预计停电问题到周四下午开始得到缓解，目前实施rolling blackout计划每隔3小时停电一个半小时（duty cycle 大概66%)。不过现在看起来实际的情况要比这个稍好一些。</li>
+</ul>
+<p>周三夜里开始情况似乎出现了转机。至周四早10点再没有过停电。ERCOT早晨报告说夜间在解决发电问题上”made significant progress”，因此电力公司可以逐步把能并网的客户都并网。周四开始天气转暖，周四当日最高零度，周五最高6度，之后继续回升直到下周三到达20度/12度的顶峰。供水问题任没有获得解决。Austin Waters早晨更新说市中心的供水厂已经恢复运行，但仍然需要时间修复distribution，预计时间未知。</p>
+<p>周四下午一点半，<a href="https://twitter.com/counihanmegan/status/1362469309407092737?s=21" target="_blank" rel="noopener">Twitte上收集</a>的存在断水情况的区号如下图。大部分地区断水均已超过24小时。居民被要求在缺水的情况下融化雪水作为日用水，有些情况下甚至只能饮用融化的雪水。尽管今天总体情况相较之前已经大幅好转，超市也陆续开门了（Round Rock附近的超市还是大部分都关门），不过饮用水等还是很快被抢购一空。开着的超市也实行限购防止囤货。目前纫仍不知道什么时候恢复供水。</p>
+<p><img src="/images/water-outage-aus-2021.png" alt="Austin存在断水情况的地区"><span class="image-caption">Austin存在断水情况的地区</span></p>
+<p>周四下午二点，市政府搞了一个在线press conference。Austin Water的负责人：</p>
+<ul>
+<li>最大的水处理厂已经上线了</li>
+<li>市中心的水库已经放空了。需要时间重新蓄水，加压和诊断水路中的问题。</li>
+<li>第一优先级是恢复给医院和应急设施的供水。</li>
+<li>只字未提最重要的何时恢复供水的问题。</li>
+<li>Q &amp; A Session:<ul>
+<li>[Q] 有多少人没有供水的？ [A] 不明，数以千计（？）</li>
+<li>[Q] 没有水的人应该怎么办？ [A] 可以找邻居帮忙借（？？？）</li>
+<li>[Q] 有没有具体的恢复供水的timeline？[A] 恢复供水是一个需要很多天的过程，目前没有具体timeline。Austin在周二的时候一夜leak了几百万加仑的蓄水，导致管道压力不足。为了防止这样的事情发生所以需要慢慢打开供水网，同时修补发现的leak。Austin目前有三个主要的供水网络，其中Center-North网是主干网络，因此会从这里着手开始。恢复供水时会优先供给发电厂医院等基础设施</li>
+</ul>
+</li>
+</ul>
+<p>2月20日周六晚9点，打开水龙头出现了轻微的排开空气的声音，紧接着有几毫升的水从水龙头里挤了出来，不知道这是不是好消息。</p>
+<p>2月21日周日早9点50分，有水了。水压显然不是很是很稳定而且看上去没有热水，但是日常洗漱烧菜应该是够用了。</p>
+<h1 id="德州的电力系统"><a href="#德州的电力系统" class="headerlink" title="德州的电力系统"></a>德州的电力系统</h1><p>本来想写点东西解释一下德州电网为什么会变成这个样子的，不过这件事一直拖到了现在。推荐一个视频吧，对情况有一个比较理性和技术层面的分析。couldn’t explained better myself。</p>
+<p><a href="https://www.youtube.com/watch?v=08mwXICY4JM" target="_blank" rel="noopener">Practical Engineering: What Really Happened During the Texas Power Grid Outage?</a></p>
+<p>[1] Rolling blackout就是轮流拉闸限电。电力公司轮流关闭各个区域的电源减少电网压力。上海在2010年前每年夏天都有这个过程，只不过一般被限电的是工厂，商场而非住宅区。加州的朋友们估计对这个也非常熟悉。虽然电力公司说每一轮停电应该是10-40分钟，但实际上看来完全不是这样。而且说实在很多停电看起来更像是电网故障。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Adventure/" rel="tag"># Adventure</a>
+              <a href="/tags/Natural-disaster/" rel="tag"># Natural disaster</a>
+              <a href="/tags/City-crisis/" rel="tag"># City crisis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/05/fe3h-madenning/" rel="prev" title="" 火焰纹章：风花雪月"最高难度体验报告"="">
+      <i class="fa fa-chevron-left"></i> "火焰纹章：风花雪月"最高难度体验报告
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/02/covid19-vaccination/" rel="next" title="在德州奥斯汀接种COVID-19疫苗纪实">
+      在德州奥斯汀接种COVID-19疫苗纪实 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#德州的电力系统"><span class="nav-number">1.</span> <span class="nav-text">德州的电力系统</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yue Yao" src="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+  <p class="site-author-name" itemprop="name">Yue Yao</p>
+  <div class="site-description" itemprop="description">He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tripack45" title="GitHub → https://github.com/tripack45" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:patrick.yaoyue@gmail.com" title="E-Mail → mailto:patrick.yaoyue@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://peiyuanqi.me/" title="https://peiyuanqi.me/" rel="noopener" target="_blank">Peyuan Qi's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zzhou612.com/" title="https://zzhou612.com/" rel="noopener" target="_blank">Nathan Zhou's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://me.xlk.me/" title="https://me.xlk.me/" rel="noopener" target="_blank">Luke Xuan's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nomadtype.ninja/" title="https://nomadtype.ninja/" rel="noopener" target="_blank">Tony Su's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zhxchen17.github.io/" title="https://zhxchen17.github.io/" rel="noopener" target="_blank">ZhxChen17's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://c-t-a.me/" title="https://c-t-a.me/" rel="noopener" target="_blank">Tong'an Cai's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jasonqsy.github.io/" title="https://jasonqsy.github.io/" rel="noopener" target="_blank">Jason Qian's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.gaotong.rocks/" title="https://blog.gaotong.rocks/" rel="noopener" target="_blank">Tong Gao's Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yue Yao</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8aeee2a1b4553a" async="async"></script>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Patricium.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://tripack45.github.io/2021/02/18/texasblackout21/",
+            identifier: "2021/02/18/texasblackout21/",
+            title: "德州2021冬季大停电纪实"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Patricium.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+</script>
+
+</body>
+</html>

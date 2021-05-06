@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/icon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/icon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/icon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://tripack45.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="This post contains solutions to specific problem used in CMU 15513. If you are taking the course, please do not read further. In this post, I will introduce you to a bug of the program. At first I tho">
+<meta name="keywords" content="CMU 15513,Bug analysis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Real Smart Compilers">
+<meta property="og:url" content="https://tripack45.github.io/2018/05/30/datalab/index.html">
+<meta property="og:site_name" content="Patricium">
+<meta property="og:description" content="This post contains solutions to specific problem used in CMU 15513. If you are taking the course, please do not read further. In this post, I will introduce you to a bug of the program. At first I tho">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-05-06T21:57:52.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Real Smart Compilers">
+<meta name="twitter:description" content="This post contains solutions to specific problem used in CMU 15513. If you are taking the course, please do not read further. In this post, I will introduce you to a bug of the program. At first I tho">
+
+<link rel="canonical" href="https://tripack45.github.io/2018/05/30/datalab/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Real Smart Compilers | Patricium</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Patricium</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">He had three chairs.</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-tasks"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-resume/cv">
+
+    <a href="/cv" rel="section"><i class="fa fa-fw fa-pencil"></i>Resume/CV</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tripack45.github.io/2018/05/30/datalab/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+      <meta itemprop="name" content="Yue Yao">
+      <meta itemprop="description" content="He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patricium">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Real Smart Compilers
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-30 12:38:00" itemprop="dateCreated datePublished" datetime="2018-05-30T12:38:00+00:00">2018-05-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index">
+                    <span itemprop="name">Tech</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/05/30/datalab/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/30/datalab/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This post contains solutions to specific problem used in CMU 15513. If you are taking the course, please do not read further.</p>
+<p>In this post, I will introduce you to a bug of the program. At first I thought this is a hardware bug. Then I suspect this is a compiler bug. Yet it turns out, the real issue is undefined behavior in my program. We will see how compiler makes “wrong” optimizations, when undefined behavior is involved.</p>
+<a id="more"></a>
+<h1 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h1><h2 id="Lab-setup"><a href="#Lab-setup" class="headerlink" title="Lab setup"></a>Lab setup</h2><p>In the first lab of the course, the datalab, we are asked to solve a seriers puzzles on integers, under the following rule:</p>
+<ul>
+<li>Only bitwise manipulations are allowed. No branches, loops etc.</li>
+<li>Only arithemetic operations allowed is <code>+</code>. No <code>&gt;</code>, <code>&lt;</code> or <code>-</code>. </li>
+<li>Only logic operator allowed is <code>!</code></li>
+<li>Only <code>int</code> types are allowed.</li>
+<li>For each puzzle, only a given number of operations are allowed.</li>
+<li>You can only use integer constants within 0 to 255 (0x00 to 0xFF);</li>
+</ul>
+<p>The function that I am trying to implement, is the following:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * bitCount - returns count of number of 1's in word</span></span><br><span class="line"><span class="comment"> *   Examples: bitCount(5) = 2, bitCount(7) = 3</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 40</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The solutions is quite elegent. If you count the bits one after another, very easily exeeds the number allowed operations. You have to do the counting “in parallel”, taking advantage of the hardware. The idea is to count bits first in group of 2, then in group of 4, then 8, followed by 16 and 32. A 8-bit example is provided the following: suppose we need to count <code>1011 1010</code>. </p>
+<ul>
+<li>You first group the number in pair, and count the number of 1s in each pair. <ul>
+<li>Take the odd bits of the number <code>1011 1010 &amp; 0101 0101 = 00 01 00 00</code></li>
+<li>Take the even bits <code>1011 1010 &amp; 1010 1010 = 10 10 10 10</code>. Right shift by 1 <code>01 01 01 01</code></li>
+<li>Add previous results gives <code>01 10 01 01</code>. This is number of 1s in each pair. </li>
+</ul>
+</li>
+<li>Count the number of 1s in each group of 4.<ul>
+<li>Extracts odd pairs. <code>01 10 01 01 =&gt; 00 10 00 01</code></li>
+<li>Right shift by 2 then extract. <code>01 10 01 01 =&gt; 00 01 10 01 =&gt; 00 01 00 01</code></li>
+<li>Add together. <code>00 11 00 10</code></li>
+</ul>
+</li>
+<li>Do the same again with different shift. </li>
+<li>Extract the lowest 16 bits. This gives the count. </li>
+</ul>
+<p>The code implementing the algorithm is provided as follows. The code is pretty cryptic. You can skip the code for now. We will refer to specific parts of the code later.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bitCount</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> mask2_half = <span class="number">0x55</span> | (<span class="number">0x55</span> &lt;&lt; <span class="number">8</span>);</span><br><span class="line">  <span class="keyword">int</span> mask2      = mask2_half | (mask2_half &lt;&lt; <span class="number">16</span>);</span><br><span class="line">  <span class="keyword">int</span> count2_0   = x &amp; mask2;</span><br><span class="line">  <span class="keyword">int</span> count2_1   = (x &gt;&gt; <span class="number">1</span>) &amp; mask2;</span><br><span class="line">  <span class="keyword">int</span> count2     = count2_0 + count2_1;</span><br><span class="line">  <span class="keyword">int</span> mask4_half = <span class="number">0x33</span> | (<span class="number">0x33</span> &lt;&lt; <span class="number">8</span>);</span><br><span class="line">  <span class="keyword">int</span> mask4      = mask4_half | (mask4_half &lt;&lt; <span class="number">16</span>);</span><br><span class="line">  <span class="keyword">int</span> count4_0   = count2 &amp; mask4;</span><br><span class="line">  <span class="keyword">int</span> count4_1   = (count2 &gt;&gt; <span class="number">2</span>) &amp; mask4;</span><br><span class="line">  <span class="keyword">int</span> count4     = count4_0 + count4_1;</span><br><span class="line">  <span class="keyword">int</span> mask8_half = <span class="number">0x0f</span> | (<span class="number">0x0f</span> &lt;&lt; <span class="number">8</span>);</span><br><span class="line">  <span class="keyword">int</span> mask8      = mask8_half | mask8_half &lt;&lt; <span class="number">16</span>;</span><br><span class="line">  <span class="keyword">int</span> count8_0   = count4 &amp; mask8;</span><br><span class="line">  <span class="keyword">int</span> count8_1   = (count4 &gt;&gt; <span class="number">4</span>) &amp; mask8;</span><br><span class="line">  <span class="keyword">int</span> count8     = count8_0 + count8_1;</span><br><span class="line">  <span class="keyword">int</span> count16    = count8 + (count8 &gt;&gt; <span class="number">8</span>);</span><br><span class="line">  <span class="keyword">int</span> count32    = count16 + (count16 &gt;&gt; <span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"sizeof(int) = %d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%x, %x\n"</span>, mask2, count2);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"count2 &gt;&gt; 2 = %x, mask4 = %x\n"</span>, count2 &gt;&gt; <span class="number">2</span>, mask4);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"(count2 &gt;&gt; 2) &amp; mask4 = %x, count4_1 = %x\n"</span>, (count2 &gt;&gt; <span class="number">2</span>) &amp; mask4, count4_1);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%x, count4_0 = %x, count4_1 = %x, %x\n"</span>, mask4, count4_0, count4_1, count4);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%x, %x\n"</span>, mask8, count8);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%x, %x\n"</span>, count16, count32);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> count32 &amp; <span class="number">0xff</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="The-bug"><a href="#The-bug" class="headerlink" title="The bug"></a>The bug</h2><p>The function fails when I call it with -1 with argrument. In 2s’ complement representation, -1 becomes <code>0xffff ffff</code>. Clearly there are 32 bits in the number. Well, program output is the following:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> ❯ ./btest -f bitCount -1 -1</span><br><span class="line">sizeof(int) = 4</span><br><span class="line">55555555, aaaaaaaa</span><br><span class="line">count2 &gt;&gt; 2 = 2aaaaaaa, mask4 = 33333333</span><br><span class="line">(count2 &gt;&gt; 2) &amp; mask4 = 2222222, count4_1 = 2222222</span><br><span class="line">33333333, count4_0 = 22222222, count4_1 = 2222222, 24444444</span><br><span class="line">f0f0f0f, 6080808</span><br><span class="line">60e1010, 60e161e</span><br><span class="line">ERROR: Test bitCount(-1[0xffffffff]) failed...</span><br><span class="line">...Gives 30[0x1e]. Should be 32[0x20]</span><br></pre></td></tr></table></figure>
+<p>I know this is not a “bug” with my code. Now the university provides each student an Intel sponsered course server. The grading is done on that server. This same program executes successfully on the sever. </p>
+<p>Further more, the course work comes with a formal verification tool, based on binary decision diagrams, that formally proves the correctness of the program. Of course the code passes the checker.</p>
+<h1 id="The-analysis"><a href="#The-analysis" class="headerlink" title="The analysis"></a>The analysis</h1><h2 id="What-happened"><a href="#What-happened" class="headerlink" title="What happened?"></a>What happened?</h2><p>We examine the output, and noticed the following:</p>
+<ul>
+<li><code>count2</code> is <code>0xAAAA AAAA</code>. Shift of <code>count2</code> becomes <code>0x2AAA AAAA</code> </li>
+<li>Masking <code>0x2AAA AAAA</code> with <code>0x3333 3333</code> gives <code>0x0222 2222</code> (value of <code>mask4_1</code>).</li>
+</ul>
+<p>Essentially,</p>
+<ul>
+<li><code>count2 &gt;&gt; 1</code> should do a <strong>arithmetic</strong> right shift, resulting <code>0xEAAA AAAA</code>. Here it does a logical shift.</li>
+<li><code>mask4_1</code> lose an <code>2</code> during the <code>&amp;</code>ing. </li>
+</ul>
+<p>A few more comments:</p>
+<ul>
+<li>An arithematic right shift duplicates the sign bit. I.e. it divides the integer value by 4. A logical shift, on the other hand, always put 0 on most significant bit.</li>
+<li>If the masking is done right, the right shift and left shift should generate identical ouput. As long as the intermediate result is not required, it should be OK to use either.</li>
+<li>However since I am printing the intermediate result, it has to be a arithematic shift.</li>
+</ul>
+<h2 id="The-scope-of-the-bug"><a href="#The-scope-of-the-bug" class="headerlink" title="The scope of the bug"></a>The scope of the bug</h2><p>I started off by suspecting this is a hardware bug. My local machine runs on I7-7567U CPU, running OS X. The bug is reproducible on a I7-7820HQ machine also running OS X. The cluster, on the other hand, runs on 2013 versions of Xeon CPUs. This could be a bug that is introduced in recent archs. </p>
+<p>I post this issue on to course Piazza and seek help from the instruction team. A reply from the Kevin Geng, one of the TAs is quoted as follows</p>
+<blockquote>
+<p>… I’m personally a bit curious about this, … Though I think the probability of it being a hardware bug is fairly low — it’s more likely to be a compiler bug, at best.</p>
+</blockquote>
+<p>I started by looking into other configurations. By default the code is compiled by the following command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -O1 -Wall -m32 -lm -o source.c</span><br></pre></td></tr></table></figure>
+<p>With a bit of the help from my friend Wchg, I have the following result:</p>
+<ul>
+<li>On my friends 2016 version Macbook Pro, the problem exists.</li>
+<li>On my local machine, Changing the optimization level from 1 to 0 solves the issue (<code>-O1</code> to <code>-O0</code>).</li>
+<li>On my friend’s linux machine with Core i9 (I think), install latest version of <code>clang</code> and compile with it, the problem exhibits. </li>
+<li>On all systems, compiling with <code>gcc</code> solves the problem.</li>
+</ul>
+<p>So I guess Kevin is right. This might as well be a compiler issue. However the code only contain logical operators, it is somewhat astonishing that clang could get something that trivial wrong. That being said, there also exists a very tiny possibility that this indeed is a hardware bug. Perhaps somehow only the code sequence generated by clang triggers that bug.</p>
+<h2 id="Disassembling-the-code"><a href="#Disassembling-the-code" class="headerlink" title="Disassembling the code"></a>Disassembling the code</h2><p>To get to the bottom of this, I disassembled the compiled binary. The following command extracts the assembly code of <code>bitCount()</code> function from the executable <code>btest</code>. <code>otool</code> is the equivalent of <code>objdump</code> on OS X, I believe.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">otool -tvV btest -p _bitCount</span><br></pre></td></tr></table></figure>
+<p>The disassembly is long indeed. We extract the relavent portion from it:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">btest:</span><br><span class="line">(__TEXT,__text) section</span><br><span class="line">_bitCount:</span><br><span class="line">00002510	pushl	%ebp</span><br><span class="line">00002511	movl	%esp, %ebp</span><br><span class="line">00002513	pushl	%ebx</span><br><span class="line">00002514	pushl	%edi</span><br><span class="line">00002515	pushl	%esi</span><br><span class="line">00002516	subl	$0x1c, %esp</span><br><span class="line">00002519	movl	0x8(%ebp), %ebx</span><br><span class="line">0000251c	movl	%ebx, %eax</span><br><span class="line">0000251e	andl	$0x55555555, %eax</span><br><span class="line">00002523	shrl	%ebx</span><br><span class="line">00002525	andl	$0x55555555, %ebx</span><br><span class="line">0000252b	addl	%eax, %ebx</span><br><span class="line">0000252d	movl	%ebx, %eax</span><br><span class="line">0000252f	andl	$0x33333333, %eax</span><br><span class="line">00002534	movl	%eax, -0x28(%ebp)</span><br><span class="line">00002537	movl	%ebx, %ecx</span><br><span class="line">00002539	shrl	$0x2, %ecx</span><br><span class="line">0000253c	movl	%ecx, -0x14(%ebp)</span><br><span class="line">0000253f	andl	$0x13333333, %ecx</span><br><span class="line">00002545	movl	%ecx, -0x18(%ebp)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Interesting things happens on address, <code>0x0000 253F</code> and <code>0x 0000 252F</code>. Both lines uses an integer counter to preform the masking. The compiler got the first integer correct, <code>0x3333 3333</code>. However the second integer is problematic. It is generated as <code>0x1333 3333</code>.</p>
+<p>On the other hand, on line <code>0x0000 2539</code>, we see that a <code>shrl</code> (logical right shift) is generated, instead of an arithmetic shift. </p>
+<p>I checked the code compiled with -O0. The compiler generated arithmetic shifts.</p>
+<p>All the evidence suggests that somehow the compiler generates wrong binary code. It looks much like a compiler bug.</p>
+<h1 id="Root-cause"><a href="#Root-cause" class="headerlink" title="Root cause"></a>Root cause</h1><h2 id="The-reply"><a href="#The-reply" class="headerlink" title="The reply"></a>The reply</h2><p><strong>The following content is adpated from an reply by CMU 15513 instruction team. The author is Kevin Geng.</strong></p>
+<p>I’ve been able to reduce the test case to the following:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bitCount</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> mask2      = <span class="number">0x55555555</span>;</span><br><span class="line">  <span class="keyword">int</span> count2_0   = x &amp; mask2;</span><br><span class="line">  <span class="keyword">int</span> count2_1   = (x &gt;&gt; <span class="number">1</span>) &amp; mask2;</span><br><span class="line">  <span class="keyword">int</span> count2     = count2_0 + count2_1;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"count2 = %08x\n"</span>, count2);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"count2 &gt;&gt; 2 = %08x\n"</span>, count2 &gt;&gt; <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>On my personal machine, running with <code>-O0</code> outputs <code>count2 &gt;&gt; 2 = eaaaaaaa</code> and running with <code>-O1</code> outputs <code>count2 &gt;&gt; 2 = 2aaaaaaa</code>. Obviously, this is wrong. … it should still be defined as an arithmetic right-shift; certainly it wouldn’t be reasonable to believe that the default for <code>clang</code> is to output a logical right-shift. And in general, <code>clang</code> does use an arithmetic right-shift; though while <code>gcc</code> <a href="https://gcc.gnu.org/onlinedocs/gcc/Integers-implementation.html" target="_blank" rel="noopener">guarantees</a> this behavior, I couldn’t find any similar sources for <code>clang</code>. </p>
+<p>Compiling with clang’s <a href="https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html" target="_blank" rel="noopener">UndefinedBehaviorSanitizer</a>, though, reveals what the actual culprit is: the computation of <code>count2</code> results in a signed overflow, which is undefined behavior. This is the real reason why Clang is able to emit a logical right-shift. I think the reasoning goes something like this:</p>
+<ul>
+<li>Both <code>count2_0</code> and <code>count2_1</code> are the result of and-ing with the mask <code>0x55555555</code>.</li>
+<li>The mask removes sign bit. So both <code>count2_0</code> and <code>count2_1</code> must be positive.</li>
+<li>The compiler may assume undefined behavior will never occur. Then sum must be positive. </li>
+<li>Since <code>count2</code> must be positive, logical and arithmetic right-shift are equivalent.</li>
+<li>Since <code>count2</code> is positive, the sign bit must be zero. Thus right shifting <code>count2</code> by 2 clears the most significant 3 bits.</li>
+<li>If the most significant 3 bits of <code>count2</code> are all zero, masking it with <code>0x3333 3333</code> or <code>0x1333 3333</code> is equivalent. The compiler may choose either constant. </li>
+</ul>
+<p>In conclusion, there is no bug of any sort. </p>
+<h2 id="Take-away"><a href="#Take-away" class="headerlink" title="Take away"></a>Take away</h2><p>I’ve always know that compiler are allowed to assume that undefined behaviors may not happen, and preform optimizations based on that assumption. A well known example, is that the compiler may optimize the following code into infinite loops:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">1u</span>;</span><br><span class="line">    <span class="keyword">while</span> (i) &#123;</span><br><span class="line">        i++; </span><br><span class="line">        <span class="comment">// Unsigned int overflowing is undefined behavior</span></span><br><span class="line">        <span class="comment">// Assuming no overflow</span></span><br><span class="line">        <span class="comment">// i increases monotically -&gt; greater then zero</span></span><br><span class="line">        <span class="comment">// while condition always met -&gt; infinite loop</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>It just never occured to me that such “aggresive” optimization may happen with rather conservative optimizations. On the other hand, it seems like the <code>gcc</code> is either more conservative, i.e. obeying more rules, or “less clever”, since it missed all these reasoning. </p>
+<p>The take ways are:</p>
+<ul>
+<li>Compilers are very clever. Complicated deduction can be made with little assumptions.</li>
+<li>Use <code>clang</code>‘s UndefinedBehaviorSanitizer to check code validity, if weired things happens.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CMU-15513/" rel="tag"># CMU 15513</a>
+              <a href="/tags/Bug-analysis/" rel="tag"># Bug analysis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/01/haveibeenpwned/" rel="prev" title="Have I been pawned?">
+      <i class="fa fa-chevron-left"></i> Have I been pawned?
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/07/crackc2/" rel="next" title="Cracking the VE475 Challenge 2 Server">
+      Cracking the VE475 Challenge 2 Server <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-problem"><span class="nav-number">1.</span> <span class="nav-text">The problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lab-setup"><span class="nav-number">1.1.</span> <span class="nav-text">Lab setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">1.2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-bug"><span class="nav-number">1.3.</span> <span class="nav-text">The bug</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-analysis"><span class="nav-number">2.</span> <span class="nav-text">The analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-happened"><span class="nav-number">2.1.</span> <span class="nav-text">What happened?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-scope-of-the-bug"><span class="nav-number">2.2.</span> <span class="nav-text">The scope of the bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disassembling-the-code"><span class="nav-number">2.3.</span> <span class="nav-text">Disassembling the code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Root-cause"><span class="nav-number">3.</span> <span class="nav-text">Root cause</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-reply"><span class="nav-number">3.1.</span> <span class="nav-text">The reply</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Take-away"><span class="nav-number">3.2.</span> <span class="nav-text">Take away</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yue Yao" src="https://secure.gravatar.com/avatar/da291af05e5e720bc535f8bf6063a590?s=400">
+  <p class="site-author-name" itemprop="name">Yue Yao</p>
+  <div class="site-description" itemprop="description">He likes Programming Languages, well-designed Systems and Good Stories. He just got his MSc in Computer Science from Carnegie Mellon.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tripack45" title="GitHub → https://github.com/tripack45" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:patrick.yaoyue@gmail.com" title="E-Mail → mailto:patrick.yaoyue@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://peiyuanqi.me/" title="https://peiyuanqi.me/" rel="noopener" target="_blank">Peyuan Qi's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zzhou612.com/" title="https://zzhou612.com/" rel="noopener" target="_blank">Nathan Zhou's Website</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://me.xlk.me/" title="https://me.xlk.me/" rel="noopener" target="_blank">Luke Xuan's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nomadtype.ninja/" title="https://nomadtype.ninja/" rel="noopener" target="_blank">Tony Su's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://zhxchen17.github.io/" title="https://zhxchen17.github.io/" rel="noopener" target="_blank">ZhxChen17's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://c-t-a.me/" title="https://c-t-a.me/" rel="noopener" target="_blank">Tong'an Cai's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jasonqsy.github.io/" title="https://jasonqsy.github.io/" rel="noopener" target="_blank">Jason Qian's Page</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.gaotong.rocks/" title="https://blog.gaotong.rocks/" rel="noopener" target="_blank">Tong Gao's Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yue Yao</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8aeee2a1b4553a" async="async"></script>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Patricium.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://tripack45.github.io/2018/05/30/datalab/",
+            identifier: "2018/05/30/datalab/",
+            title: "Real Smart Compilers"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Patricium.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+</script>
+
+</body>
+</html>
