@@ -72,5 +72,5 @@ post_meta:
 
 # Math Equations Render Support
 math:
-  mathjax:
+  katex:
     enable: true
