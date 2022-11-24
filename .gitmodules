@@ -3,4 +3,4 @@
 	url = https://github.com/fi3ework/hexo-theme-archer.git
 [submodule "themes/next"]
 	path = themes/next
-	url = https://github.com/theme-next/hexo-theme-next
+	url = https://github.com/next-theme/hexo-theme-next.git
