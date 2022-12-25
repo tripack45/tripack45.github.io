@@ -4,3 +4,6 @@
 [submodule "themes/next"]
 	path = themes/next
 	url = https://github.com/next-theme/hexo-theme-next.git
+[submodule "source/blob"]
+	path = source/blob
+	url = git@github.com:tripack45/blog-blobdump.git
