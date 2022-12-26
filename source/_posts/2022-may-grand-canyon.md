@@ -17,7 +17,9 @@ Antelope Valley 和 Horseshoe Bend 等网红景点，最后在6月3日回到了V
 
 ![Posing for stargazing on the north rim of the Grand Canyon](/blob/2022-May-GC/IMG_3489.JPG)
 
-(照片均经过压缩，尤其是导出时丢掉了HDR参数，不太知道怎么修正，希望有人教教我。)
+正文全部图片约290 MiB，图片分辨率挺好可以直接右键保存，但是用流量的朋友们请小心。
+
+(照片均经过导出，尤其是导出时丢掉了HDR参数，不太知道怎么修正，希望有人教教我。)
 
 <!-- More -->
 
