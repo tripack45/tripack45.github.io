@@ -90,4 +90,9 @@ deploy:
     name: tripack45
     email: patrick.yaoyue@gmail.com
 
+markdown:
+  render:
+    breaks: false
 
+markdown_it_plus:
+  breaks: false
