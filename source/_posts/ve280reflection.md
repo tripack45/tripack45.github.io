@@ -28,20 +28,20 @@ I think VE280 did something right.
 ```c++
 class A {
   A() { ... }
-  T1 a1();
-  T2 a2();
+  T1 a1;
+  T2 a2;
 }
 
 class B : public B {
   B() { ... }
-  T1 b1();
-  T2 b2();
+  T1 b1;
+  T2 b2;
 }
 
 class C : public B {
   C() { ... }
-  T1 c1();
-  T2 c2();
+  T1 c1;
+  T2 c2;
 }
 
 C c();
@@ -52,7 +52,7 @@ C c();
 # The puzzle
 
 Let's start by revealing the solution to the puzzle. If you were to construct and object of class `C`, entities are constructed 
-(invoked) in the following order: `c1`, `c2`, `C()`, `c1`, `c2`, `B()`, `a1`, `a2`, `A()`. Deconstruction is called in the reverse order. 
+(invoked) in the following order: `a1`, `a2`, `A()`, `b1`, `b2`, `B()`, `c1`, `c2`, `C()`. Deconstruction is called in the reverse order [6]. 
 
 Why this order? Well the technically correct answer is of course *because the C++ standard says so*. But one has to wonder 
 whether this choice is in fact *arbitrary*, or at least if it *makes sense* [2]. Though not explicitly explained (as far as 
@@ -136,3 +136,5 @@ initialization according to the order of occurence in declaration, which allows 
 
 [5] It is possible to write imperative language in a fashion that is very much functional: design your program in a way that 
 correctness conditions of programs relies on values as much as possible, instead of layout of things in the memory.
+
+[6] Original writeup contains significant errors. Kudos to [Peiyuan Qi](https://peiyuanqi.me/) for fixes.
