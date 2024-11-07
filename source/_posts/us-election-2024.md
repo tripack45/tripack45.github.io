@@ -15,9 +15,7 @@ It has been a long day today. People say history is made today.
 The Democrats suffered a landslide electoral vote in the US election (votes are still counting). They are expected to lost control over both the senate and the house. Additionally they are all but certain to lost Whitehouse. Donald Trump defied all odds, succeeded in his third thrust to presidency. People did say *third time's a charm*.
 
 It is difficult for me to describe how I feel. I am not a US citizen. This is not my country. 
-I am not a permenant resident, and the US immigration policy made it very clear that presumebly they want me to get out the moment I finish my degree. Therefore while I can understand my the concern that my American friends share for *their* country, I do not share the same experience.
-
-On the other hand, sufficies to say that the outcome weighs on me, and makes it particularly hard for me to catch any sleep tonight, mostly for two reasons.
+I am not a permenant resident, and the US immigration policy made it very clear that presumebly they want me to get out the moment I finish my degree. Therefore while I can understand my the concern that my American friends share for *their* country, I do not share the same experience. On the other hand, sufficies to say that the outcome weighs on me somewhat, and makes it particularly hard for me to catch any sleep tonight, mostly for two reasons.
 
 # Life in the US as international student
 
@@ -39,21 +37,48 @@ Now Donald Jeremy Trump is poised to be the new resident of the oval office, I t
 
 I think, at the end of everything, it's the rhetoric and the line of thinking coming from the Trump-world that really terrified me. It's the fear of not knowing what comes next, and it seems *anything* could come next. Because those making policies doesn't seem to be concerned about innocent people getting caught in the crossfire, and they don't particularly like to listen to reason. Futhermore, if anything were to happen, your whole life is derailed and few paths to remedy exist. It's a feeling of helplessness, constantly present, albeit at an extremely low intensity that you almost wont notice it unless you go look for it. Yet you know clerly it has always been there. It's the psycological equivalent of the lower-back pain. Perhaps I should learn to be comfortable with the situation, but a cure would be nice. 
 
-In the last months of this election a document dubbed *Project 2025* caught some public attention. It was described by its authors as a document detailing the first matter of business of the incoming Trump administration. In the chapter on higher education, there are line of recommendations that echoes the rhetoric of that 2021 congressional hearing. The writing seems benign: it merely asks the federal government to better enforce existing statute/guidelines related to foreign funding in higher education institutions. Of course, this all depends on what "better" means, and the document left lots of room for imagination. Perhaps I was, at the end of they day, rightfully worried for once. 
+In the last months of this election a document dubbed *Project 2025* caught some public attention. It was described by its authors as a document detailing the first matters of business of the incoming Trump administration. In the chapter on higher education, there are line of recommendations that echoes the rhetoric of that 2021 congressional hearing. The writing seems benign: it merely asks the federal government to better enforce existing statute/guidelines related to foreign funding in higher education institutions. Of course, this all depends on what "better" means, and the document left lots of room for imagination. Perhaps I was, at the end of they day, rightfully worried for once. 
 
 # The idealogical angle
 
-Secondly, on the ideological spectrum I have to admit that I sympathize with Democrat's position more than the Republican's, especially when it comes to respecting and, sometimes tolerating, individual differences. In particular, I agree with the *ideal* that individuals rights and choices, as long as they don't (materially) harm others, ought to be respected [5] [7] [9]. 
+Secondly, on the ideological spectrum I have to admit that I sympathize with Democrat's position more than the Republican's, especially when it comes to respecting and, sometimes tolerating, individual differences. In particular, I agree with the *ideal* that individuals rights and choices, as long as they don't (materially) harm others, ought to be respected [5] [7] [9]. On top of that, I would also take issue that the Republican party courts support, or to say the least refuse to distinguish themselves from, the far-right end of the political specturum. 
+History tells us this brand of organization does not bode well with foreigners and minorities.
 
-That being said, I do also believe that the Democrat's messaging and strategy has proved to be fundamentally ineffective, and frankly out of touch . This election cycle the Democrats focused on attacking Trump on broadly "character", as a person and as a president. While Jeremy is truly an awlful person and have some pretty distructive tendencies towards the institutions of the US, Democrats fails to understand that none of this matters in the face of economic hardship and (perceived, some may say) issues of securities. It is now seems to be apparent that people will take a gesture (or *a concept of a plan*, if you will) towards a ``better'' economic situation over civil rights (of others, and even themselves) and soundness of institutions without a glimpse. 
+That being said, I do also believe that the Democrat's messaging and strategy has proved to be fundamentally ineffective, and frankly *out of touch*. This election cycle the Democrats focused on attacking Trump on broadly "character", as a person and as a president. While Jeremy is truly an awlful person and have some pretty distructive tendencies towards the institutions of the US, Democrats fails to understand that none of this matters in the face of economic hardship and (perceived, some may say) issues of securities. It is now seems to be apparent that people will take a gesture (or *a concept of a plan*, if you will) towards a ``better'' economic situation over civil rights (of others, and even themselves) and soundness of institutions without a glimpse. 
 
-The miscalculation on Democrats' side seems to be that (enough) people will prioritize character over more "earthly" concerns. Futhermore, Democrats seems to be reluctant to recognize that this is simply not how the electorate evaluate things. Failing to see things the way that the electorate sees it is, by definition, being out of touch [6]. Democrat's response is to try aligning the electorate by advocacy and education. The media often play a part in this. This seems to come off as lecturing and condesending, and in the end did not work as well as it needs to. 
+The miscalculation [11] on Democrats' side seems to be that (enough) people will prioritize character over more "earthly" concerns. Futhermore, Democrats seems to be reluctant to recognize that this is simply not how the electorate evaluate things. Failing to see things the way that the electorate sees it is, by definition, being out of touch [6]. Democrat's response is to try aligning the electorate by advocacy and education. The media often play a part in this. This seems to come off as lecturing and condesending, and in the end did not work as well as it needs to. 
 
-All in all [1], I'm somewhat sympathetic to the cause in principle, but in the end Democrats need to understand that getting in touch with the electorate is how you get your moral attitudes into actual policies. Not winning elections helps no one. I think what will happen, and what needs to happen next, is that Democrats has to either de-emphasize (or walk back) on a number of social topics. It is not to say that they have to go to the other extreme, but rather they need to learn choosing fights to pick. 
+All in all, I'm somewhat sympathetic to the cause in principle, but in the end Democrats need to understand that getting in touch with the electorate is how you get your moral attitudes into actual policies. Not winning elections helps no one. I think what will happen, and what needs to happen next, is that Democrats has to either de-emphasize (or walk back) on a number of social topics. It is not to say that they have to go to the other extreme, but rather they need to learn choosing fights to pick. 
 
-The shift in electorate towards liberalism seems to be much slower than Democrats has hoped. In times like these, two quotes rings a bell. The first one is from a certain German Philosopher, who postulates that in a society, *base determines superstructure*. The other is dubbed *Planck's Principle*: 
+The shift in electorate towards liberalism seems to be much slower than Democrats has hoped. In times like these, two quotes rings a bell. The first one is from a certain German Philosopher, who postulates that in a society, *base determines superstructure*. The Democrats attempted to build a superstructure characterized by individuality, empathy and a public square for personal expressiveness. On one hand, it failed to define a framework within which various forms of *tolerance paradoxes*, especially between those who Democrats seek to protect [10] can be resolved. More prominantly, said superstructure has no *base*, therefore the half-built superstructure is now collapsing. Caught within it rubbles are a generation of ordinary people with their faiths in governance. 
+From the ashes arises a populist movement unabahsed of its cruelty. 
+
+This brings me to the second quote. It is dubbed *Planck's Principle*: 
 
 > A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die and a new generation grows up that is familiar with it.
+
+# Now What?
+
+What comes next? What does the next 4 years look like, for me, and for us international students? 
+
+On the campaign trail the Democrats want to paint a picture of collapsing democratic institutions for a future Trump administration. The Trump campaign obviously rejected the characterization as fear mongering: it is mostly "fine" in the first term. Democrats argue that America is lucky the first round, and this round it's going to be different. The electorate basically called Democrat's bluff, so now we are in the finding out phase.
+
+If Democrats were right, then all bets are off. Things will be extremely volatile, and there's no use in trying to predict events in that scenario here. We could talk about what laws the administration could use to round up Chinese in the US. We can reference interim camps for Japanese in WW2 to get a sense of what it was like. Yet, none of that matters if it ever comes close to that point. For the sake of discussion let's say what we get is basically the first term but with more aggressive policies. First question: what is Trump's policy?
+
+The two center pillar of the discourse in this election cycle seems to be immigration and economy. On immigration, Trump seems to focus mostly on the southern border, and the touted solution is "mass deportation". On the economy Trump wants *tariffs on all imported goods*. Both policies, especially the economic policy, seems to be terrible ideas, and is what the media attacks most frequently. However, it should be noted that "Trump says a lot things", and (to quote another friend of mine), the "line between comedy and policy in a Trump speech is often blurred". It is not clear at all whether these are actual policy suggestions, or just hyperbole used to illustrate a point. 
+If we look back on 2016, the border wall that Trump campaigned so much about basically never materialzed [12]. The "policy" is basically a tangible mascot for the actual policy: much more draconian border controls. One could reasonably conclude that it is going to be the same deal with aforementioned "policies". 
+
+Focusing on the economy, the Trump administration seems to want to pursue an isolationist economy. If the tariff came through (but probably with much more limited scope and scale), it should raise prices somewhat. Besides that, I would be surprised if Trump administration doesn't go for another round of Tax cuts. Referencing the 2017 bill, the Tax cut likely includes moderate cuts to income taxes, but the focus is probably in the coperate world. The stock market will probably like it.
+
+In terms of budget, Republicans could shift money away from research spending (i.e. NSF), but if history is to go by, defense spending would increase. This means faculties who are majority funded by NSF could see less grants and therefore less students. Within computer science, fields with foreign competition could actually do significantly better (think nuclear physics during cold war), albeit at cost of other subfields. 
+
+Shift to immigration. The border policy on the sourthern border may very well become a humanitarian disaster, but it does not concern international students *per se*. The US, as a matter of fact, is not *my country*. It's hard to tell what will happen to H1B (and F1) policies: the coporate world has a strong incentive to keep work visas going. Trump at various occacions expressed support for expanding work visa for STEM students, but keep in mind the says-a-lot-things syndrome cuts both ways. But it should be safe to expect that H1B (F1) as a category will not vanish.
+
+For Chinese students in the US, there's always the additional risk of being caught in the crossfire, or becoming the scapegoat of the Sino-US tension. Policies that targets this directly are very rarely rational, and are likely designed to be quite cruel. Everything seems fine in a moment, than nothing is. At this moment, anti-Chinese messaging is not a talking point of the Trump campaign. However, in 2018 the trade war seems to come out from nowhere. This is the kind of risk that keeps me awake at night.  
+
+Finally, safety on the streets. This is largely a local issue. A Trump victory necessarily encourages local fringe groups. However, universities are, by and large, in Democrat leaning counties. Therefore the day to day life on the streets should not differ much.
+
+In conclusion, a sense of normalcy can probably be maintained, at least for most international students.
 
 ----------
 
@@ -73,4 +98,10 @@ The shift in electorate towards liberalism seems to be much slower than Democrat
 
 [8] (鲁迅) 哀其不幸，怒其不争
 
-[9] I'm suppressing the fact the implementation of Democrats *ideals* are far from, well, ideal. But as we all have seen, bad policies are perfectly okay. Bad priorities are not.
+[9] I'm suppressing the fact the implementation of Democrats *ideals* are far from, well, ideal. But as we all have seen, bad policies are perfectly okay with the electorate. Bad priorities are not.
+
+[10] Example: What should a liberal society do with immigrants from less liberal cultures, that, say for the sake of example, is traditionally queer phobia? 
+
+[11] History (and the world at large) spells trouble for the incumbant government due to economy. It should not be surprising that the Democrats lost the election, even if they did everything perfectly. What is surprsing is the margin. 
+
+[12] Sections of it did get built. It was not nearly close to the scale being proposed, and it did not meaningfully change the situation.
