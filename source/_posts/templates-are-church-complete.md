@@ -1,5 +1,5 @@
 ---
-title: C++ templates are church complete (without recurive templates)
+title: C++ templates are Church complete (without recurive templates)
 date: 2024-11-27 15:40:00
 tags:
 - C++
