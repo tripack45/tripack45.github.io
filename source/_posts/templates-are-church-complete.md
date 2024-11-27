@@ -28,7 +28,7 @@ is an accidental result of mixing wide range of language features.
 This post seeks to prove otherwise. I argue that it is the fundamental design of the template language that renders this system 
 Turing-complete. The code I am about to show you relies on **only template definitions and (static) class (template) member access notations**. 
 In particular, it does not use recursive templates. This is important because programming language experts recognize that any 
-use of general recursion tends to lead to Turing completeness. The lack of any recursiveness in the definitions makes this 
+use of general recursion tends to lead to Turing completeness. The lack of any apparent recursiveness in the definitions makes this 
 result ever more surprising. 
 
 # Templates as ML-`functor`s
@@ -40,7 +40,7 @@ signature ascription. A `class` in C++ can be viewed as an ML-module. A class `C
 * The module it contains abstract type of the same name `type C`.
 * `C`'s methods are function values of the module, accepting an extra argument of `C` (or `C ref`).
 
-A template therefore is `functor`, mapping modules (classes) to (classes). In C++, classes are allowed to have templates 
+A template therefore is `functor`, mapping modules (classes) to modules (classes). In C++, classes are allowed to have templates 
 as members. This corresponds to allowing functor members in a module. 
 
 In the ML module system, the user must declare the content of a module using a `signature`. It is especially important for non-value components of the module, if `M` is a *module* (or functor) member of the another module, then it most be known, at 
